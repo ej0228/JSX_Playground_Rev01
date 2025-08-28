@@ -30,7 +30,8 @@ import { SchemasAPI } from "../../services/schemas.service";
 import { useLocation, useNavigate, useParams, Navigate } from "react-router-dom";
 import useProjectId from "../../hooks/useProjectId";
 
-
+import { SlidersHorizontal } from "lucide-react"; // 고급 설정 아이콘
+import ModelAdvancedSettingsPopover from "./ModelAdvancedSettingsPopover";
 
 // 메시지 배열 -> 텍스트 병합
 function mergeMessageText(messages) {
@@ -390,6 +391,34 @@ const PlaygroundComponent = ({ PROJECT_ID, onCopy, onRemove, showRemoveButton, p
   const [loadingSchemas, setLoadingSchemas] = useState(false);
   const [schemasError, setSchemasError] = useState(null);
 
+
+
+  // ✅ Model Advanced Settings (UI 상태)
+  const [isModelAdvOpen, setIsModelAdvOpen] = useState(false);
+  const modelAdvBtnRef = useRef(null);
+
+  // ✅ 실제 파라미터 값들 
+  const [modelAdv, setModelAdv] = useState({
+    useTemperature: false,
+    useTopP: false,
+    useMaxTokens: false,
+    useFrequencyPenalty: false,
+    usePresencePenalty: false,
+    temperature: 0.7,
+    topP: 1,
+    maxTokens: 4096,
+    frequencyPenalty: 0,
+    presencePenalty: 0,
+    stopInput: "",
+    apiKeyOverride: "",
+  });
+
+  // 변경 헬퍼
+  const updateModelAdv = (patch) => setModelAdv((prev) => ({ ...prev, ...patch }));
+
+
+
+
   //variables 관련
   const [placeholders, setPlaceholders] = useState([]);
   useEffect(() => {
@@ -530,6 +559,7 @@ const PlaygroundComponent = ({ PROJECT_ID, onCopy, onRemove, showRemoveButton, p
       alert(e?.message || "Delete failed");
     }
   };
+
 
   // ===== 서버 호출/모델 선택/스트리밍 =====
   const API_URL = "/api/chatCompletion";
@@ -760,21 +790,46 @@ const PlaygroundComponent = ({ PROJECT_ID, onCopy, onRemove, showRemoveButton, p
         content: (m.content || "").trim(),
       }));
 
+    // ✅ 선택적 파라미터 병합 유틸
+    const mp = {
+      provider: selectedProvider,
+      adapter: selectedAdapter,
+      model: selectedModel,
+      // 기본값은 넣지 않고, '사용' 체크된 것만 세팅
+      ...(modelAdv.useTemperature ? { temperature: Number(modelAdv.temperature) } : {}),
+      ...(modelAdv.useTopP ? { topP: Number(modelAdv.topP) } : {}),
+      ...(modelAdv.useMaxTokens ? { maxTokens: parseInt(modelAdv.maxTokens, 10) } : {}),
+      ...(modelAdv.useFrequencyPenalty ? { frequencyPenalty: Number(modelAdv.frequencyPenalty) } : {}),
+      ...(modelAdv.usePresencePenalty ? { presencePenalty: Number(modelAdv.presencePenalty) } : {}),
+    };
+
+    // ✅ Stop sequences: 콤마/개행 구분 허용
+    const stops = (modelAdv.stopInput || "")
+      .split(/[\n,]/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+    if (stops.length) mp.stop = stops;
+
+    // ✅ API Key Override(선택)
+    if ((modelAdv.apiKeyOverride || "").trim()) {
+      mp.apiKeyOverride = modelAdv.apiKeyOverride.trim();
+    }
+
     return {
       projectId: PROJECT_ID,
       messages: chat,
-      modelParams: {
-        provider: selectedProvider,
-        adapter: selectedAdapter,
-        model: selectedModel,
-        temperature: 0.7,
-      },
+      modelParams: mp,
       streaming,
       outputSchema: attachedUserSchema
-        ? { id: attachedUserSchema.id, name: attachedUserSchema.name, schema: attachedUserSchema.schema || {} }
+        ? {
+          id: attachedUserSchema.id,
+          name: attachedUserSchema.name,
+          schema: attachedUserSchema.schema || {},
+        }
         : null,
     };
   }
+
 
   // 논-스트리밍
   async function submitNonStreaming(body) {
@@ -895,6 +950,31 @@ const PlaygroundComponent = ({ PROJECT_ID, onCopy, onRemove, showRemoveButton, p
               </strong>
               {connections.length > 0 && <ChevronDown size={14} />}
             </button>
+
+            {/* 고급 설정 버튼 */}
+            <button
+              ref={modelAdvBtnRef}
+              type="button"
+              className={styles.iconActionBtn}
+              onClick={() => setIsModelAdvOpen((v) => !v)}
+              title="Model advanced settings"
+              aria-haspopup="dialog"
+              aria-expanded={isModelAdvOpen}
+              style={{ marginLeft: 6 }}
+            >
+              <SlidersHorizontal size={16} />
+            </button>
+
+            {/* 고급 설정 팝오버 */}
+            <ModelAdvancedSettingsPopover
+              open={isModelAdvOpen}
+              anchorRef={modelAdvBtnRef}
+              values={modelAdv}
+              onChange={updateModelAdv}
+              onClose={() => setIsModelAdvOpen(false)}
+              projectId={PROJECT_ID}
+              provider={selectedProvider}
+            />
 
             {/* 연결이 없으면 옆에 추가 버튼 표시 */}
             {connections.length === 0 && (

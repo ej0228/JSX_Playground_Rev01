@@ -1,0 +1,308 @@
+/* ==============================================================
+   ModelAdvancedSettingsPopover.module.css
+   - 고급 설정 팝오버(우하단 패널) 전용 - 이미지 스타일 매칭
+============================================================== */
+
+/* 메인 컨테이너 - JavaScript에서 동적으로 위치 설정 */
+.advWrap {
+  width: 320px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  animation: slideUp 0.2s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 헤더 */
+.advHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f3f4;
+}
+
+.advTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.advCloseBtn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: #6b7280;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.advCloseBtn:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+/* 바디 */
+.advBody {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.advDescription {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 파라미터 행 */
+.advParameterRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+}
+
+.advParameterInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.advParameterControls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.advLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* 헬프 아이콘 */
+.advHelpIcon {
+  width: 16px;
+  height: 16px;
+  background: #d1d5db;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: help;
+  transition: background-color 0.2s ease;
+}
+
+.advHelpIcon:hover {
+  background: #9ca3af;
+}
+
+/* 값 입력 필드 */
+.advValueInput {
+  width: 60px;
+  padding: 4px 8px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  text-align: right;
+  background: #ffffff;
+  color: #111827;
+  transition: all 0.2s ease;
+}
+
+.advValueInput:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.advApiKeyInput {
+  width: 80px;
+  padding: 4px 8px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #f9fafb;
+  color: #6b7280;
+  font-family: monospace;
+  transition: all 0.2s ease;
+}
+
+.advApiKeyInput:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  background: #ffffff;
+}
+
+/* 토글 스위치 */
+.advToggleSwitch {
+  position: relative;
+  display: inline-flex;
+  height: 20px;
+  width: 36px;
+  align-items: center;
+  border-radius: 10px;
+  background: #d1d5db;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.advToggleSwitch.advToggleOn {
+  background: #3b82f6;
+}
+
+.advToggleThumb {
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  transition: transform 0.3s ease;
+  transform: translateX(2px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.advToggleSwitch.advToggleOn .advToggleThumb {
+  transform: translateX(18px);
+}
+
+/* 슬라이더 행 */
+.advSliderRow {
+  margin-left: 16px;
+  margin-top: -8px;
+  margin-bottom: 4px;
+}
+
+/* 슬라이더 */
+.advSlider {
+  width: 100%;
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+}
+
+.advSlider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.advSlider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.advSlider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.advSlider:focus {
+  outline: none;
+}
+
+.advSlider:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* 호버 효과 */
+.advValueInput:hover,
+.advApiKeyInput:hover {
+  border-color: #9ca3af;
+}
+
+.advToggleSwitch:hover {
+  opacity: 0.9;
+}
+
+.advSlider:hover {
+  background: #d1d5db;
+}
+
+/* 반응형 */
+@media (max-width: 480px) {
+  .advWrap {
+    left: 16px;
+    right: 16px;
+    width: auto;
+  }
+
+  .advParameterRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .advParameterControls {
+    align-self: flex-end;
+  }
+}
+
+/* 전역 스타일링 */
+.advWrap * {
+  box-sizing: border-box;
+}
+
+.advApiKeyBtn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  /* slate-500 */
+  font-family: monospace;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.advApiKeyBtn:hover {
+  background: #f1f5f9;
+  /* slate-100 */
+  color: #0f172a;
+  /* slate-900 */
+}
