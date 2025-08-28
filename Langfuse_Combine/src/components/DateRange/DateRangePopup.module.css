@@ -1,0 +1,193 @@
+/* 팝업 뒤의 전체 화면을 덮는 반투명 오버레이 */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+/* 팝업 컨테이너의 위치를 fixed로 변경 */
+.popupContainer {
+  position: fixed; /* 뷰포트 기준 위치 */
+  width: 620px;
+  background-color: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 16px;
+  z-index: 1001; /* 오버레이보다 위에 오도록 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.calendarsWrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  gap: 24px;
+}
+
+.navButton {
+  position: absolute;
+  top: 4px;
+  background: none;
+  border: 1px solid #334155;
+  color: #94a3b8;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navButton:hover { 
+  background-color: #1e293b; 
+}
+.navLeft { left: 16px; }
+.navRight { right: 16px; }
+
+.monthContainer {
+  flex: 1;
+}
+
+.monthTitle {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #f1f5f9;
+  margin: 0 0 16px 0;
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.dayHeader {
+  text-align: center;
+  font-size: 12px;
+  color: #94a3b8;
+  padding-bottom: 8px;
+}
+
+.dayCell {
+  background: none;
+  border: none;
+  color: #e2e8f0;
+  text-align: center;
+  padding: 6px 0;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.dayCell:disabled {
+  color: transparent;
+  cursor: default;
+  background-color: transparent !important;
+}
+.dayCell:not(:disabled):hover { 
+  background-color: #334155; 
+}
+.dayCell.selectedRange { 
+  background-color: #1e293b; 
+  border-radius: 0;
+}
+.dayCell.rangeStart { 
+  background-color: #4f46e5;
+  border-top-left-radius: 9999px;
+  border-bottom-left-radius: 9999px;
+}
+.dayCell.rangeEnd { 
+  background-color: #4f46e5;
+  border-top-right-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+}
+.dayCell.rangeStart.rangeEnd {
+  border-radius: 9999px;
+}
+/* ... (기존 스타일) ... */
+
+.timeControls {
+  border-top: 1px solid #334155;
+  margin-top: 16px;
+  padding-top: 16px;
+  display: grid; /* Grid 레이아웃으로 변경 */
+  grid-template-columns: 1fr 1fr; /* 1:1 비율로 두 열 생성 */
+  gap: 16px;
+  align-items: center;
+}
+
+.timeGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.timeGroup label {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.timeInput {
+  display: flex;
+  align-items: center;
+  gap: 0.2em;
+  color: #94a3b8;
+}
+
+.timeIcon {
+  color: #94a3b8;
+  margin-right: 4px;
+}
+
+.timeInput input {
+  background-color: #020817;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  color: #e2e8f0;
+  height: 36px;
+  width: 36px;
+  text-align: center;
+  font-size: 14px;
+  outline: none;
+}
+
+.timeInput input:focus {
+  border-color: #4f46e5;
+}
+
+.timeInput .selectWrapper select {
+  background-color: #020817;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  color: #e2e8f0;
+  height: 36px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0 24px 0 10px;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+}
+
+.selectWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.selectArrow {
+  position: absolute;
+  right: 8px;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.timezone {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-left: auto;
+}

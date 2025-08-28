@@ -1,0 +1,115 @@
+/* src/components/FilterControls/FilterBuilder.module.css */
+
+.container {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  /* ❗️ 핵심: left, right 속성을 여기서 제거합니다. */
+  /* JavaScript가 인라인 스타일로 제어하게 됩니다. */
+  
+  width: max-content;
+  min-width: 750px;
+  z-index: 1000;
+  
+  /* 나머지 스타일은 이전과 동일하게 유지 */
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filterRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.conjunction {
+  color: #8a8a9e;
+  font-size: 14px;
+  width: 60px; /* 'Where', 'And' 텍스트 정렬을 위해 너비 고정 */
+}
+
+.select, .input {
+  background-color: #1e293b;
+  color: #e0e0ff;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.input {
+  flex-grow: 1; /* 값 입력창이 남은 공간을 채우도록 설정 */
+}
+
+.removeButton, .addButton {
+  background-color: transparent;
+  color: #8a8a9e;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.removeButton:hover {
+  background-color: #ff4a4a20;
+  color: #ff7a7a;
+}
+
+.addButton {
+  background-color: #3c3c5a50;
+  align-self: flex-start; /* 버튼이 왼쪽 정렬되도록 */
+  margin-top: 8px;
+}
+
+.addButton:hover {
+  background-color: #4a4a6a;
+  color: #ffffff;
+}
+
+.badge {
+  background-color: #3a86ff;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 10px;
+  margin-left: 8px;
+  font-weight: bold;
+}
+
+.dateButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #1e293b;
+  color: #e0e0ff;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  flex-grow: 1; /* 다른 입력창과 너비를 맞춥니다. */
+  text-align: left;
+  white-space: nowrap;
+}
+
+.dateButton:hover {
+  border-color: #4a4a6a;
+}
+
+.dateButton span {
+  color: #8a8a9e;
+}

@@ -1,0 +1,125 @@
+.popover {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  width: 280px;
+  background-color: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10;
+}
+
+.primaryButton,
+.secondaryButton {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.primaryButton {
+  background-color: #4f46e5;
+  border-color: #4f46e5;
+  color: white;
+}
+.primaryButton:hover {
+  filter: brightness(1.1);
+}
+
+.secondaryButton {
+  background-color: #1e293b;
+  border-color: #334155;
+  color: #f1f5f9;
+}
+.secondaryButton:hover {
+  background-color: #334155;
+}
+
+/* 버튼 비활성화 스타일 추가 */
+.secondaryButton:disabled {
+  background-color: #1e293b;
+  color: #64748b;
+  border-color: #334155;
+  cursor: not-allowed;
+}
+.secondaryButton:disabled:hover {
+    filter: none;
+    background-color: #1e293b;
+}
+
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 12px;
+}
+.divider hr {
+  flex-grow: 1;
+  border: none;
+  border-top: 1px solid #1e293b;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #020817;
+  border: 1px solid #1e293b;
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+.searchBox svg {
+  color: #64748b;
+}
+.searchBox input {
+  background: none;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 13px;
+  width: 100%;
+}
+
+.promptList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* promptItem 스타일 수정 */
+.promptItem {
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex; /* 정렬을 위해 flex 추가 */
+  align-items: center;
+  gap: 8px; /* 아이콘과 텍스트 간격 */
+}
+.promptItem:hover {
+  background-color: #1e293b;
+}
+
+/* 체크 아이콘 스타일 추가 */
+.checkIcon {
+  color: #a78bfa; /* 이미지와 유사한 보라색 */
+  flex-shrink: 0; /* 아이콘이 찌그러지지 않도록 설정 */
+}
+
+/* 체크 아이콘이 없을 때 정렬을 맞추기 위한 빈 공간 */
+.checkIconPlaceholder {
+  width: 16px; /* 아이콘 크기와 동일하게 설정 */
+  height: 16px;
+  flex-shrink: 0;
+}

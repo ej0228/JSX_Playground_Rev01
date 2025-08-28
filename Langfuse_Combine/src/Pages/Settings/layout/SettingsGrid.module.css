@@ -1,0 +1,134 @@
+/* AG-Grid 컴포넌트 관련 스타일 */
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 8px;
+}
+
+.headerButton {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 13px;
+    height: 36px;
+    box-sizing: border-box;
+}
+
+.columnsButton {
+    background-color: #020817;
+    color: white;
+    border: 1px solid #2f415d;
+    position: relative;
+}
+
+.columnsButton:hover {
+    background-color: #192333;
+}
+
+.count {
+    background-color: #30405d;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    margin-left: 4px;
+}
+
+.addButton {
+    background-color: #1e293c;
+    color: #e2e8f0;
+    border: 1px solid #2f415d;
+}
+
+.addButton:hover {
+    background-color: #2c3a4f;
+}
+
+.iconButton {
+    justify-content: center;
+    background-color: #020817;
+    border: 1px solid #2f415d;
+    color: #cbd5e1;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+}
+
+/* AG Gird 컨테이너 및 테마 오버라이드 */
+.gridContainer {
+    max-height: 600px;
+    overflow-y: auto;
+    position: relative;
+    height: 65vh;
+
+    border: 1px solid #2f415d;
+    border-radius: 6px;
+
+    --ag-background-color: #020817;
+    --ag-header-background-color: #020817;
+    --ag-row-background-color: #020817;
+    --ag-odd-row-background-color: #020817;
+    --ag-border-color: #2f415d;
+    --ag-header-column-separator-color: #2f415d;
+    --ag-header-foreground-color: #94a3b8;
+    --ag-foreground-color: #e2e8f0;
+    --ag-font-family: 'Pretnedard', sans-serif;
+    --ag-font-size: 11px;
+}
+
+.gridContainer :global(.ag-paging-panel) {
+    background-color: #18181b;
+}
+
+/* --- 정렬(Sort) 아이콘과 메뉴(Menu) 아이콘 스타일 --- */
+
+/* 1. 정렬 아이콘(▲, ▼) 스타일 */
+/* AG Grid의 기본 아이콘 폰트를 숨깁니다. */
+.gridContainer :global(.ag-icon) {
+  font-family: none !important;
+}
+
+/* 오름차순 아이콘(ag-icon-asc)을 우리 SVG로 교체합니다. */
+.gridContainer :global(.ag-icon-asc::before) {
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3e%3cpath d='M5 1 L9 6 L1 6 Z' fill='%23a0a0a0'/%3e%3c/svg%3e");
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 6px;
+}
+
+/* 내림차순 아이콘(ag-icon-desc)을 우리 SVG로 교체합니다. */
+.gridContainer :global(.ag-icon-desc::before) {
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3e%3cpath d='M5 9 L1 4 L9 4 Z' fill='%23a0a0a0'/%3e%3c/svg%3e");
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 6px;
+}
+
+/* 2. 메뉴 아이콘 (햄버거 메뉴) 스타일 */
+/* 컬럼 메뉴 아이콘을 기본적으로 숨깁니다. */
+.gridContainer :global(.ag-header-cell-menu-button) {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* 그리드 헤더에 마우스를 올렸을 때만 메뉴 아이콘이 보이도록 합니다. */
+.gridContainer :global(.ag-header-cell:hover .ag-header-cell-menu-button) {
+  opacity: 1;
+}
+
+:global(.ag-theme-alpine .ag-cell) {
+    display: flex;
+    align-items: center;
+}
+
+:global(.ag-theme-alpine .ag-header) {
+    border-bottom: 1px solid #2f415d;
+}

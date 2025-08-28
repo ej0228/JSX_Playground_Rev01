@@ -1,0 +1,54 @@
+/* General 페이지만 해당 */
+
+.inputPristine {
+    color: #444;
+}
+
+.codeBlock {
+    background-color: #020817;
+    padding: 16px;
+    border-radius: 4px;
+    color: #79b8ff;
+    font-family: monospace;
+    white-space: pre-wrap;
+    font-size: 1em;
+}
+
+/* danger zone 스타일 */
+.dangerZone {
+    border-color: #dc3545;
+}
+
+.dangerZone h3 {
+    color: #dc3545;
+}
+
+.dangerButton {
+    background-color: #2a303c;
+}
+
+.dangerButton:hover {
+    background-color: #721b1c;
+}
+
+.flexBetween {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-top: 5px;
+    margin-top: 5px;
+}
+
+.flexBetween:first-of-type {
+    margin-top: 0;
+}
+
+.flexBetween h4 {
+    margin: 0;
+    color: #fff;
+}
+
+.flexBetween:last-of-type {
+    border-bottom: none;
+}

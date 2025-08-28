@@ -1,0 +1,61 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.description {
+    font-size: 14px;
+    color: #9CA3AF; /* gray-400 */
+    margin: 0;
+}
+
+.input {
+    width: 100%;
+    padding: 10px 12px;
+    background-color: #020817;
+    border: 1px solid #4A5568;
+    border-radius: 6px;
+    color: #F9FAFB;
+    font-size: 14px;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 1px #60a5fa;
+}
+
+.actions {
+    margin-top: 8px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.deleteButton {
+    width: 100%; /* 버튼을 꽉 채움 */
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: #DC2626; /* red-600 */
+    color: white;
+    border: none;
+}
+
+.deleteButton:hover:not(:disabled) {
+    background-color: #B91C1C; /* red-700 */
+}
+
+.deleteButton:disabled {
+    background-color: #4B5563; /* gray-600 */
+    color: #9CA3AF; /* gray-400 */
+    cursor: not-allowed;
+}

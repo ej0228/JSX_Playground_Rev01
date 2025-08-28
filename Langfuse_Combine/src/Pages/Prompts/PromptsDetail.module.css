@@ -1,0 +1,346 @@
+.container {
+  color: #e2e8f0;
+  background-color: #020817;
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 48px); /* ProjectHeader 높이 제외 */
+  box-sizing: border-box;
+}
+
+/* 1. 상단 헤더 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+}
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #94a3b8;
+}
+.promptNameH1 {
+  color: #e2e8f0;
+  font-weight: 500;
+  font-size: 20px;
+  margin: 0;
+}
+.versionDropdown {
+  background-color: #0f172a;
+  border: 0px solid #1e293b;
+  padding: 2px 2px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px; 
+  font-size: 13px;
+}
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.actionButton, .navButton {
+  background: transparent;
+  border: 1px solid #334155;
+  color: #cbd5e1;
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.navButtons {
+  display: flex;
+}
+.navButton {
+  padding: 6px;
+}
+.navButton:disabled {
+  color: #4b5563;
+  cursor: not-allowed;
+}
+.navButton:first-child {
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.navButton:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* 2. 탭 */
+.tabs {
+  border-bottom: 1px solid #1e293b;
+}
+.tabButton {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.tabButton.active {
+  color: #f1f5f9;
+  border-bottom-color: #f1f5f9;
+}
+
+/* 3. 메인 그리드 */
+.mainGrid {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 16px;
+  padding-top: 16px;
+  overflow: hidden;
+}
+
+/* 3a. 좌측 패널 */
+.leftPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #0f172a;
+}
+.versionToolbar {
+  display: flex;
+  padding: 8px;
+  gap: 8px;
+  border-bottom: 1px solid #1e293b;
+  flex-shrink: 0;
+}
+.searchBox {
+  display: flex;
+  align-items: center;
+  background-color: #020817;
+  border: 1px solid #1e293b;
+  border-radius: 6px;
+  padding: 0 8px;
+  flex-grow: 1;
+}
+.searchIcon {
+  color: #64748b;
+}
+.searchBox input {
+  background: none; border: none; outline: none; color: white; padding: 6px; font-size: 13px; width: 100%;
+}
+.newButton {
+  background-color: #020817;
+  border: 1px solid #334155;
+  color: #cbd5e1;
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.versionList {
+  list-style: none;
+  margin: 0;
+  padding: 0 8px 8px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.versionItem {
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.versionItem:hover {
+  background-color: #1e293b;
+}
+.versionItem.selected {
+  background-color: #27272a;
+}
+.versionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.versionName {
+  flex-shrink: 1; /* 공간이 부족할 때 줄어들도록 설정 */
+  white-space: nowrap; /* 줄바꿈 방지 */
+  overflow: hidden; /* 넘치는 텍스트 숨김 */
+  text-overflow: ellipsis; /* 넘치는 텍스트를 ...으로 표시 */
+  color: #e2e8f0; /* 기본 텍스트 색상 */
+  font-weight: 500;
+}
+.versionLabel {
+  color: #a78bfa;
+}
+.statusTagLatest, .statusTagProd {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.statusTagLatest {
+  background-color: #164e63;
+  color: #67e8f9;
+}
+.statusTagProd {
+  background-color: #166534;
+  color: #4ade80;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+  padding-left: 8px;
+}
+
+.tagItem {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: #374151; /* 회색 계열 */
+  color: #d1d5db;
+}
+
+.versionMeta {
+  font-size: 11px; /* 글자 크기를 줄입니다. */
+  color: #94a3b8;
+  margin-top: 4px;
+  padding-left: 8px;
+  display: flex; /* 자식 요소들을 가로로 배열합니다. */
+  justify-content: space-between; /* 양 끝으로 정렬합니다. */
+  white-space: nowrap; /* 줄바꿈을 방지합니다. */
+}
+.versionMeta p {
+  margin: 0;
+  text-overflow: ellipsis; /* 내용이 길면 말줄임표로 표시합니다. */
+  overflow: hidden;
+}
+
+
+/* 3b. 우측 패널 */
+.rightPanel {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #0f172a;
+}
+.detailTabs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 4px 4px 12px;
+  border-bottom: 1px solid #1e293b;
+  flex-shrink: 0;
+}
+.detailTabButtons {
+  display: flex;
+  gap: 4px;
+}
+.detailTabButton {
+  background: none; border: none; color: #94a3b8; padding: 6px 10px;
+  cursor: pointer; font-size: 13px; border-radius: 6px;
+}
+.detailTabButton.active {
+  background-color: #1e293b;
+  color: #f1f5f9;
+}
+.detailActions {
+  display: flex;
+  align-items: center;
+}
+.playgroundButton {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  color: #cbd5e1;
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+.iconButton {
+  background: none; border: none; color: #94a3b8; cursor: pointer; padding: 4px;
+}
+.promptArea {
+  flex-grow: 1;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.promptCard {
+  background-color: #020817;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+}
+.promptHeader {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #94a3b8;
+  border-bottom: 1px solid #1e293b;
+  font-weight: 500;
+}
+.promptBody {
+  padding: 12px;
+}
+.promptBody pre {
+  margin: 0;
+  font-family: 'D2Coding', monospace;
+  font-size: 13px;
+  color: #cbd5e1;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.variablesInfo {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-top: 8px;
+}
+.variablesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+.variableTag {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  color: #cbd5e1;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'D2Coding', monospace;
+}
+/* 다른 탭 클릭 시 보일 플레이스홀더 스타일 */
+.placeholder {
+  padding: 24px;
+  color: #64748b;
+  font-size: 14px;
+}

@@ -1,0 +1,125 @@
+/* src/pages/Tracing/Tracing.module.css */
+.container {
+  /* position, grid 관련 속성을 모두 제거하고 flexbox 레이아웃만 남깁니다. */
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 48px);
+  overflow: hidden;
+}
+
+/* .containerWithDetail 클래스는 이제 필요 없으므로 삭제합니다. */
+.listSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.tabs {
+  border-bottom: 1px solid #1e293b;
+  display: flex;
+}
+
+.tabButton {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.tabButton.active {
+  color: #f1f5f9;
+  border-bottom-color: rgba(241, 245, 249, 0.85);
+}
+
+.filterBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap; 
+}
+
+/* ▼▼▼ 왼쪽 필터 그룹 스타일 추가 ▼▼▼ */
+.filterLeftGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contentArea {
+  flex-grow: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentArea :global(th),
+.contentArea :global(td) {
+  white-space: nowrap;
+}
+
+.cellText {
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.traceLink {
+  color: #93c5fd;
+  text-decoration: none;
+}
+.traceLink:hover {
+  text-decoration: underline;
+}
+
+.observationCell {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tagsCell {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.tagPill {
+  background-color: #312e81; 
+  color: #e0e7ff;            
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.filterRightGroup {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0; 
+}
+
+/* ▼▼▼ 아래 스타일을 추가해주세요. ▼▼▼ */
+.iconButton {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.iconButton:hover {
+  background-color: #334155;
+  color: #ef4444; /* 삭제 아이콘에 어울리는 빨간색으로 변경 */
+}

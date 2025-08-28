@@ -1,0 +1,167 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.modalContent {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 580px;
+  color: #e2e8f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 24px;
+  border-bottom: 1px solid #334155;
+}
+
+.modalTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.modalSubtitle {
+  font-size: 14px;
+  color: #94a3b8;
+  margin: 4px 0 0 0;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+}
+.closeButton:hover {
+  background-color: #334155;
+}
+
+.modalBody {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formGroup label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.descriptionText {
+  font-size: 13px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 10px 12px;
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  color: #e2e8f0;
+  font-size: 14px;
+}
+
+.codeEditorWrapper {
+  position: relative;
+}
+
+.codeEditor {
+  font-family: 'D2Coding', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.prettifyButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #334155;
+  color: #e2e8f0;
+  border: 1px solid #4b5563;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.prettifyButton:hover {
+    background-color: #4b5563;
+}
+
+
+.modalFooter {
+  padding: 16px 24px;
+  border-top: 1px solid #334155;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footerNote {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.footerActions {
+    display: flex;
+    gap: 8px;
+}
+
+.cancelButton,
+.saveButton {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cancelButton {
+  background-color: transparent;
+  border: 1px solid #4b5563;
+  color: #f1f5f9;
+}
+.cancelButton:hover {
+  background-color: #334155;
+}
+
+.saveButton {
+  background-color: #4f46e5;
+  border: 1px solid #4f46e5;
+  color: white;
+}
+.saveButton:hover {
+  filter: brightness(1.1);
+}

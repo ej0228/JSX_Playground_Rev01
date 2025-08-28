@@ -1,0 +1,107 @@
+/* Members 페이지만 해당 */
+
+.nameCell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+}
+
+.avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.roleCell {
+    display: flex;
+    align-items: center;
+}
+
+.roleSelect {
+    background-color: #020817;
+    color: #e2e8f0;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    padding: 6px 28px 6px 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.2em 1.2em;
+    cursor: pointer;
+}
+
+.roleSelect:hover {
+    border-color: #475569;
+}
+
+.actionRenderer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.actionButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #94a3b8;
+}
+
+.actionButton:hover {
+    color: #ff6b6b;
+}
+
+.confirmModalContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.confirmModalIcon {
+  flex-shrink: 0;
+}
+
+.confirmModalText h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.confirmModalText p {
+  margin: 0;
+  color: #666;
+}
+
+.confirmModalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.cancelButton, .archiveButton {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.cancelButton {
+  background-color: white;
+  color: #333;
+}
+
+.archiveButton {
+  background-color: #ef4444; /* red-500 */
+  color: white;
+  border-color: #ef4444;
+}

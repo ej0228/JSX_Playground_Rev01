@@ -1,0 +1,97 @@
+.paginationContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 8px;
+    background-color: #020817;
+    color: #94a3b8;
+    border: 1px solid #2f415d;
+    border-top: none;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    font-size: 13px;
+}
+
+.pageSizeSelector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pageSizeSelect {
+    background-color: #020817;
+    border: 1px solid #2f415d;
+    color: #e2e8f0;
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 13px;
+    cursor: pointer;
+    margin-right: 16px;
+    height: 32px;
+    box-sizing: border-box;
+}
+
+.controlsWrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px
+}
+
+.pageInfo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pageInput {
+    align-items: center;
+    width: 50px;
+    background-color: #020817;
+    border: 1px solid #2f415d;
+    color: #e2e8f0;
+    border-radius: 6px;
+    text-align: center;
+    padding: 6px 4px;
+    font-size: 13px;
+    box-sizing: border-box;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.pageInput:focus {
+    outline: 1px solid #4f46e5;
+    border-color: #4f46e5;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 6px;
+}
+
+.button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1e293b;
+    color: #e2e8f0;
+    border: 1px solid #3a3a4f;
+    border-radius: 8px;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 32px;
+    height: 32px;
+}
+
+.button:hover:not(:disabled) {
+    background-color: #334155;
+}
+
+.button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.icon {
+    align-items: baseline;
+}

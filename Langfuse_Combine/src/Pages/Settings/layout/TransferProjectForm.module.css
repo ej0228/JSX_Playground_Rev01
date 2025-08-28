@@ -1,0 +1,102 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.warningBox {
+    background-color: rgba(251, 191, 36, 0.1); /* amber-400 with 10% opacity */
+    border: 1px solid #FBBF24; /* amber-400 */
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+}
+
+.warningIcon {
+    color: #FBBF24; /* amber-400 */
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.warningTitle {
+    margin: 0 0 8px 0;
+    font-weight: 600;
+    color: #FDE68A; /* amber-200 */
+}
+
+.warningText {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: #FEF3C7; /* amber-100 */
+}
+
+.warningList {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 14px;
+    color: #FEF3C7; /* amber-100 */
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.formGroup label {
+    font-weight: 500;
+    color: #F9FAFB; /* gray-50 */
+}
+
+.description {
+    font-size: 14px;
+    color: #9CA3AF; /* gray-400 */
+    margin: 0;
+}
+
+.select, .input {
+    width: 100%;
+    padding: 10px 12px;
+    background-color: #020817;
+    border: 1px solid #4A5568;
+    border-radius: 6px;
+    color: #F9FAFB;
+    font-size: 14px;
+}
+
+.select:focus, .input:focus {
+    outline: none;
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 1px #60a5fa;
+}
+
+.actions {
+    margin-top: 8px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.transferButton {
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: #DC2626; /* red-600 */
+    color: white;
+    border: none;
+}
+
+.transferButton:hover:not(:disabled) {
+    background-color: #B91C1C; /* red-700 */
+}
+
+.transferButton:disabled {
+    background-color: #4B5563; /* gray-600 */
+    color: #9CA3AF; /* gray-400 */
+    cursor: not-allowed;
+}

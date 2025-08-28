@@ -1,0 +1,53 @@
+/* 기본 패널 */
+.panel {
+  background: var(--panel-bg, #0f172a);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-top: 8px;
+}
+
+/* 헤더 */
+.panelHeader {
+  margin-bottom: 6px;
+}
+
+.panelTitle {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.panelDesc {
+  color: #94a3b8;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+/* 내용 */
+.panelBody {
+  padding-top: 6px;
+}
+
+/* Compact 모드 */
+.panelCompact {
+  padding: 8px 10px;
+}
+
+.panelCompact .panelTitle {
+  font-size: 13px;
+}
+
+.panelCompact .panelDesc {
+  font-size: 11px;
+}
+
+/* Floating 모드 (Variables 팝오버) */
+.panelFloating {
+  position: absolute;
+  z-index: 40;
+  width: 380px;
+  /* 필요 시 조절 */
+  max-height: 260px;
+  overflow: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}

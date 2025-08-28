@@ -1,0 +1,227 @@
+/* API Keys 페이지만 해당 */
+
+.note {
+    color: #888;
+    cursor: pointer;
+}
+
+.note:hover {
+    color: #fff;
+}
+
+.publicKeyCell {
+    position: relative;
+    border: 1px solid #3f3f46;
+    background: none;
+    border-radius: 6px;
+    padding: 8px 32px 8px 12px;
+    font-family: monospace;
+    word-break: break-all;
+}
+
+.copyButton {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #a1a1aa;
+    cursor: pointer;
+    display: inline-flex;
+    padding: 2px;
+}
+
+.copyButton:hover {
+    color: #e4e4e7;
+}
+
+.secretKeyCell {
+    font-family: monospace;
+}
+
+.deleteButton {
+    background: none;
+    border: none;
+    color: #a1a1aa;
+    cursor: pointer;
+    display: inline-flex;
+}
+
+.deleteButton:hover {
+    color: #ef4444;
+}
+
+/* --- Modal --- */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.5);
+}
+
+.modalContent {
+    background-color: #020817;
+    color: #f0f0f0;
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid #333;
+    width: 90%;
+    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modalTitle {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    color: #A1A1A1;
+    cursor: pointer;
+}
+
+.closeButton:hover {
+    color: #e4e4e7;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sectionTitle {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fafafa;
+}
+
+.sectionDescription {
+    font-size: 0.875rem;
+    color: #a1a1aa;
+    margin-top: -4px;
+}
+
+.inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    width: 100%;
+    background: none;
+    border: 1px solid #3f3f46;
+    border-radius: 6px;
+    padding: 8px 40px 8px 12px;
+    color: #e4e4e7;
+    font-family: monospace;
+    font-size: 0.875rem;
+    margin-bottom: 0;
+}
+
+.copyButtonInInput {
+    position: absolute;
+    right: 8px;
+    background-color: #1e293b;
+    border-radius: 6px;
+    color: #A1A1AA;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.copyButtonInInput:hover {
+    color: #E4E4E7;
+}
+
+/* --- Usage 탭 --- */
+.tabsContainer {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid #3F3F46;
+    margin-bottom: 12px;
+}
+
+.tabButton {
+    background: none;
+    border: none;
+    color: #A1A1AA;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    border-bottom: 2px solid transparent;
+    transform: translateY(1px); /* border-bottom과 겹치게 */
+}
+
+.tabButton:hover {
+    color: #E4E4E7;
+}
+
+.tabActive {
+    color: #FAFAFA;
+    border-bottom-color: #FAFAFA;
+}
+
+/* --- 코드 블록 --- */
+.codeBlockWrapper {
+    position: relative;
+}
+
+.codeBlock {
+    background-color: #09090B;
+    border: 1px solid #3F3F46;
+    border-radius: 6px;
+    padding: 16px;
+    white-space: pre-wrap;
+    font-family: monospace;
+    font-size: 0.875rem;
+    color: #E4E4E7;
+}
+
+.copyButtonInCode {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: #A1A1AA;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.copyButtonInCode:hover {
+    color: #E4E4E7;
+}
+
+/* --- 푸터 링크 --- */
+.footerLinks {
+    font-size: 0.875rem;
+    color: #A1A1AA;
+}
+
+.footerLinks a {
+    color: #A1A1AA;
+    text-decoration: underline;
+}
+
+.footerLinks a:hover {
+    color: #E4E4E7;
+}

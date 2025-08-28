@@ -1,0 +1,76 @@
+/* 화면 전체를 덮는 반투명 배경 (오버레이) */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1050; /* 다른 콘텐츠 위에 오도록 z-index 설정 */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+/* SidePanel.jsx에서 isOpen prop이 true일 때 적용될 클래스 */
+.overlay--open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 사이드 패널의 기본 스타일 */
+.panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 600px; /* 너비를 600px로 조정 */
+  max-width: 90%;
+  height: 100%;
+  background-color: #020817; /* 배경색 조정 */
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3); /* 그림자 효과 조정 */
+  z-index: 1051; /* 오버레이보다 위에 오도록 z-index 설정 */
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%); /* 기본적으로 화면 밖에 위치 */
+  transition: transform 0.3s ease-in-out; /* 부드러운 전환 효과 */
+}
+
+/* SidePanel.jsx에서 isOpen prop이 true일 때 적용될 클래스 */
+.panel--open {
+  transform: translateX(0); /* 화면 안으로 들어옴 */
+}
+
+/* 헤더 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px; /* 패딩 조정 */
+  border-bottom: 1px solid #444; /* 테두리 색상 조정 */
+  flex-shrink: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #c9d1d9;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: #a0a0a0;
+  cursor: pointer;
+  padding: 4px;
+}
+.closeButton:hover {
+  color: #e0e0e0;
+}
+
+/* 본문 */
+.body {
+  padding: 24px;
+  flex-grow: 1;
+  overflow-y: auto;
+}

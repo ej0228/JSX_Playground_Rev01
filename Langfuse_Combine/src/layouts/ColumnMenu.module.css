@@ -1,0 +1,67 @@
+/* 컬럼 드롭다운 메뉴 전용 스타일 */
+
+.columnMenu {
+    position: fixed;
+    background-color: #020817;
+    border: 1px solid #2f415d;
+    border-radius: 6px;
+    padding: 4px;
+    z-index: 1000;
+    width: 200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 전체 선택/해제 버튼 */
+.toggleAllButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    margin: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #e2e8f0;
+    border: 1px solid #2f415d;
+}
+
+.menuItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #e2e8f0;
+}
+
+.menuItem:hover {
+    background-color: #1e293b;
+}
+
+.checkbox {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #4b5563;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a78bfa;
+    flex-shrink: 0;
+}
+
+.menuItem.disabled {
+    cursor: not-allowed;
+    color: #64748b;
+}
+
+.menuItem.disabled:hover {
+    background-color: transparent;
+}
+
+.menuItem.disabled .checkbox {
+    border-color: #334155;
+    color: #64748b;
+}

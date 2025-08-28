@@ -1,0 +1,231 @@
+/* src/pages/Tracing/SessionDetail.module.css */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 48px);
+  padding: 16px 24px;
+  background-color: #020817;
+  color: #e2e8f0;
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.sessionId {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.starIcon {
+  color: #64748b;
+  cursor: pointer;
+}
+.starIcon:hover {
+  color: #facc15;
+}
+
+.actionButton {
+  background: transparent;
+  border: 1px solid #334155;
+  color: #cbd5e1;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.actionButton:hover {
+  background-color: #1e293b;
+}
+
+.timeline {
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.traceCard {
+  background-color: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.summaryBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.positiveBar {
+  border-left: 4px solid #16a34a; /* Green */
+}
+.neutralBar {
+  border-left: 4px solid #64748b; /* Gray */
+}
+
+.summaryText {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.summaryScores {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+.scorePill {
+  background-color: #1e293b;
+  color: #94a3b8;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.traceBody {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.ioSection {
+  padding: 16px;
+  border-right: 1px solid #1e293b;
+}
+
+.ioTabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+.ioTab {
+  background: none;
+  border: 1px solid #334155;
+  color: #94a3b8;
+  padding: 4px 10px;
+  font-size: 13px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.ioTab.active {
+  background-color: #334155;
+  color: #f1f5f9;
+}
+
+.contentBox {
+  margin-bottom: 16px;
+}
+.contentBox:last-child {
+  margin-bottom: 0;
+}
+.contentBox h4 {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  color: #94a3b8;
+  font-weight: 400;
+}
+.contentBox pre, .contentBox p {
+  margin: 0;
+  font-size: 14px;
+  font-family: monospace;
+}
+.outputText {
+  font-family: inherit;
+}
+
+.highlight {
+  background-color: rgba(250, 204, 21, 0.2);
+  padding: 2px 0;
+}
+
+.metadataSection {
+  padding: 16px;
+  font-size: 12px;
+}
+
+.metaHeader {
+  display: flex;
+  justify-content: space-between;
+  color: #64748b;
+  margin-bottom: 16px;
+}
+
+.scoresGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.scoresTitle {
+  font-size: 13px;
+  font-weight: 500;
+  color: #e2e8f0;
+  margin: 0 0 4px 0;
+}
+
+.scoreItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.scoreValue {
+  font-weight: 500;
+  color: #e2e8f0;
+}
+.metaGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metaTitle {
+  font-size: 13px;
+  font-weight: 500;
+  color: #e2e8f0;
+  margin: 0 0 4px 0;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.metaItem {
+  display: grid;
+  grid-template-columns: 100px 1fr; /* 라벨과 값의 너비를 고정/가변으로 설정 */
+  gap: 8px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.metaLabel {
+  font-weight: 500;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+.metaValue {
+  color: #e2e8f0;
+  white-space: pre-wrap; /* 긴 값은 줄바꿈되도록 설정 */
+  word-break: break-all;
+}

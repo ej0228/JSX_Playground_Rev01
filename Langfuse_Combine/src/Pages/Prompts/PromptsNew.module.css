@@ -1,0 +1,89 @@
+/* 오버레이 관련 스타일(.container) 제거 후, FormPageLayout에 포함될 내부 요소 스타일만 남김 */
+
+/* ✅ Prompt 섹션 헤더 (Type 선택 + 버튼) */
+.promptHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.typeSelector {
+  display: flex; border: 1px solid #334155; border-radius: 6px; width: fit-content; overflow: hidden;
+}
+.typeButton {
+  background-color: transparent; border: none; color: #94a3b8; padding: 8px 16px;
+  cursor: pointer; font-size: 13px;
+}
+.typeButton:first-child {
+  border-right: 1px solid #334155;
+}
+.typeButton.active {
+  background-color: #334155; color: #f1f5f9;
+}
+
+/* ✅ AddPromptReference 버튼 스타일 */
+.addReferenceButton {
+  background: none; border: 1px solid #334155; border-radius: 6px; color: #94a3b8;
+  padding: 6px 10px; font-size: 13px; cursor: pointer;
+}
+.addReferenceButton:hover {
+  background-color: #1e293b;
+}
+
+/* ✅ Textarea 내부 버튼 스타일 */
+.addReferenceButtonInEditor {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  color: #94a3b8;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.addReferenceButtonInEditor:hover {
+  background-color: #1e293b;
+}
+
+/* ✅ Labels 체크박스 스타일 */
+.labelsContainer {
+  display: flex;
+  gap: 16px;
+}
+.checkboxWrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #cbd5e1;
+  cursor: pointer;
+}
+
+/* 변수 태그 컨테이너 */
+.variablesContainer {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* "VARIABLES:" 라벨 */
+.variablesLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+/* 개별 변수 태그 */
+.variableTag {
+  background-color: #1e293b;
+  color: #cbd5e1;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: 'D2Coding', monospace;
+}

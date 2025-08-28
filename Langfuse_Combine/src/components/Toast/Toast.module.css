@@ -1,0 +1,33 @@
+/* src/components/Toast/Toast.module.css */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  z-index: 9999;
+  font-size: 14px;
+  animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    bottom: 0px;
+  }
+  20% {
+    opacity: 1;
+    bottom: 30px;
+  }
+  80% {
+    opacity: 1;
+    bottom: 30px;
+  }
+  100% {
+    opacity: 0;
+    bottom: 0px;
+  }
+}

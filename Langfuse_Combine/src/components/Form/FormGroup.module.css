@@ -1,0 +1,67 @@
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #f1f5f9;
+}
+
+.subLabel {
+  font-size: 13px;
+  color: #94a3b8;
+  margin: 0;
+  min-height: 1.5em; /* 내용이 없어도 높이를 유지하여 UI가 흔들리지 않게 함 */
+}
+
+/* 다른 컴포넌트에서도 사용할 수 있도록 공통 입력 필드 스타일을 global로 정의 */
+:global(.form-input),
+:global(.form-textarea) {
+  background-color: #020817;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: #e2e8f0;
+  font-size: 14px;
+  width: 100%;
+}
+
+:global(.form-input:focus),
+:global(.form-textarea:focus) {
+  outline: none;
+  border-color: #4f46e5;
+}
+
+:global(.form-textarea) {
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+
+:global(.form-input),
+:global(.form-textarea),
+:global(.form-select) { /* .form-select 추가 */
+  background-color: #020817;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: #e2e8f0;
+  font-size: 14px;
+  width: 100%;
+}
+
+:global(.form-input:focus),
+:global(.form-textarea:focus),
+:global(.form-select:focus) { /* .form-select 추가 */
+  outline: none;
+  border-color: #4f46e5;
+}
+
+:global(.form-textarea) {
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}

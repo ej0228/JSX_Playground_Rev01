@@ -1,0 +1,708 @@
+/* ===================================================================
+   Playground.module.css
+   - 0) 공통 색/레이아웃
+   - 1) 헤더(페이지 상단)
+   - 2) 메인 그리드/카드 공통
+   - 3) Model 카드 내부(프로바이더/모델/토글)
+   - 4) Tools/Schema 패널 리스트
+   - 5) 메시지/아웃풋 카드
+   - 6) 하단 푸터(Submit + 스트리밍 설정 버튼)
+   - 7) 스트리밍 설정 팝오버(푸터의 ⚙ 전용)
+   - 8) 자잘한 상태 텍스트/유틸
+   =================================================================== */
+
+
+/* =========================
+   0) 공통 색/레이아웃
+   ========================= */
+.container {
+  color: #e2e8f0;
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 48px);
+  /* 상단 ProjectHeader 높이만큼 보정 */
+  box-sizing: border-box;
+}
+
+:root {
+  /* 다크 카드 배경/보더 공통 변수 */
+  --card: #0b1020;
+  --cardInner: #0f172a;
+  --border: #1e293b;
+}
+
+/* =========================
+   1) 헤더(페이지 상단)
+   ========================= */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title svg {
+  color: #94a3b8;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.windowInfo {
+  font-size: 13px;
+  color: #94a3b8;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.actionBtn {
+  background: #0f172a;
+  border: 1px solid var(--border);
+  color: #e2e8f0;
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.actionBtn:hover {
+  background-color: #1e293b;
+}
+
+/* =========================
+   2) 메인 그리드/카드 공통
+   ========================= */
+.mainGrid {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 16px;
+  overflow-y: auto;
+  padding-bottom: 16px;
+}
+
+.panelContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #020817;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* 카드 공통 (Model/Output 등) */
+.card,
+.outputCard {
+  background: var(--cardInner);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  position: relative;
+  /* 내부 absolute 요소 기준 */
+}
+
+.cardHeader {
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #94a3b8;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardActions {
+  display: flex;
+  gap: 8px;
+}
+
+/* 우측 상단 작은 아이콘 버튼 (복제/저장/설정/X 공통) */
+.iconActionBtn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.iconActionBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+}
+
+.cardBody {
+  padding: 14px;
+}
+
+.noApiKeyText {
+  font-size: 13px;
+  margin: 0 0 12px 0;
+}
+
+/* "Add LLM Connection" 버튼 */
+.addLlmBtn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: #e2e8f0;
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.addLlmBtn:hover {
+  background-color: #1e293b;
+}
+
+/* 상단 툴바(TOOLS/SCHEMA/VARIABLES) */
+.controlsBar {
+  display: flex;
+  position: relative;
+  gap: 8px;
+}
+
+
+/* 상단 헤더 바로 아래에 붙는 얇은 툴바 */
+.pageToolbar {
+  display: flex;
+  justify-content: flex-end;
+  /* ▶ 우측 정렬 */
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  /* 헤더 하단과 간격 맞춤 */
+  /* 선택: 배경/보더를 헤더와 톤 맞추고 싶으면 */
+  /* background: var(--c-surface-1); */
+  /* border: 1px solid var(--c-border); */
+  /* border-radius: 8px; */
+  /* margin: 8px 0 12px;  */
+}
+
+
+.controlBtn {
+  background: #0f172a;
+  border: 1px solid var(--border);
+  color: #e2e8f0;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.controlBtn .badge {
+  background-color: #334155;
+  color: #e2e8f0;
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 6px;
+  margin-left: 6px;
+}
+
+/* =========================
+   3) Model 카드 내부(프로바이더/모델/토글)
+   ========================= */
+.modelRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  /* Provider | Model | Stream toggle */
+  gap: 12px;
+  align-items: end;
+}
+
+.selectGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.selectGroup label {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.select {
+  height: 36px;
+  border-radius: 8px;
+  padding: 0 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.switchGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-self: end;
+}
+
+/* 공통 스위치 토글 */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 24px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  transition: .2s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  top: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: .2s;
+}
+
+.switch input:checked+.slider {
+  background-color: #2563eb;
+}
+
+.switch input:checked+.slider:before {
+  transform: translateX(18px);
+}
+
+/* =========================
+   4) Tools/Schema 패널 리스트
+   ========================= */
+.toolSection {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #e2e8f0;
+}
+
+.toolSearch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #020817;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0 8px;
+}
+
+.toolSearch input {
+  background: none;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 8px 4px;
+  font-size: 13px;
+  width: 100%;
+}
+
+.toolSearch svg {
+  color: #64748b;
+}
+
+.toolList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.toolItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.toolItem:hover {
+  background-color: #1e293b;
+}
+
+.toolInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e2e8f0;
+}
+
+.toolText {
+  display: flex;
+  flex-direction: column;
+}
+
+.toolName {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.toolDesc {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.editButton {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.editButton:hover {
+  color: #e2e8f0;
+}
+
+.toolButton {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: #e2e8f0;
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.toolButton:hover {
+  background-color: #1e293b;
+}
+
+.iconCircle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #334155;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #94a3b8;
+}
+
+.iconCircle:hover {
+  background-color: #1e293b;
+  color: #e2e8f0;
+}
+
+/* =========================
+   5) 메시지/아웃풋 카드
+   ========================= */
+.outputCard {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 140px;
+}
+
+.outputBody {
+  flex-grow: 1;
+  padding: 14px;
+}
+
+/* =========================
+   6) 하단 푸터(Submit + 스트리밍 설정 버튼)
+   - 기존 .footer는 더 이상 사용하지 않음(호환용 남김)
+   ========================= */
+.footer {
+  /* deprecated: 예전 하단바 */
+  position: sticky;
+  bottom: 0;
+  background: var(--card);
+  padding: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 5;
+}
+
+/* 새 하단바: 좌측 Submit(풀폭) + 우측 컨트롤(⚙) */
+.footerBar {
+  position: sticky;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--card);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 20;
+}
+
+.submitBtnFull {
+  width: 100%;
+  height: 44px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #0f172a;
+  color: #fff;
+}
+
+.submitBtnFull:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.footerRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* =========================
+   7) 스트리밍 설정 팝오버(푸터의 ⚙ 전용)
+   ========================= */
+.streamPopover {
+  position: fixed;
+  /* 화면 우하단 고정 */
+  right: 16px;
+  bottom: 72px;
+  /* Submit 바 위로 띄우기 */
+  width: 280px;
+  background: var(--card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 12px 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  z-index: 30;
+  /* 푸터(20)보다 높게 */
+}
+
+.streamPopoverHeader {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.streamPopoverSub {
+  font-size: 12px;
+  opacity: 0.75;
+  margin-bottom: 10px;
+}
+
+/* 팝오버 내부 행(라벨-토글 좌우 배치) */
+.switchRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* =========================
+   8) 자잘한 상태 텍스트/유틸
+   ========================= */
+.muted {
+  opacity: 0.7;
+}
+
+.errorText {
+  color: #ef4444;
+}
+
+/* (모델 직접 입력용) 셀렉트 스타일과 톤을 맞춘 텍스트 입력 */
+.textInput {
+  height: 36px;
+  border-radius: 8px;
+  padding: 0 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+/* 필수값 누락 시 붉은 보더로 하이라이트 */
+.inputError {
+  border-color: #ef4444 !important;
+}
+
+/* 모델 요약 한 줄 */
+.modelSummaryRow {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+}
+
+.modelPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid var(--c-border, #2a2f3a);
+  background: var(--c-surface-2, #0f1218);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--c-text, #fff);
+  cursor: pointer;
+}
+
+.modelPill:hover {
+  filter: brightness(1.06);
+}
+
+.modelProvider {
+  opacity: 0.9;
+}
+
+.modelSep {
+  opacity: 0.5;
+  margin: 0 2px;
+}
+
+.modelName {
+  font-weight: 600;
+}
+
+/* 드롭다운 메뉴 */
+.modelMenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  /* pill 바로 아래 왼쪽 정렬 */
+  min-width: 280px;
+  padding: 8px;
+  border: 1px solid var(--c-border, #2a2f3a);
+  background: var(--c-surface-2, #0f1218);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.menuSectionLabel {
+  font-size: 12px;
+  opacity: 0.6;
+  padding: 4px 6px 6px;
+}
+
+.menuItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: var(--c-text, #fff);
+  text-align: left;
+}
+
+.menuItem:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.menuItem.active {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.menuMain {
+  font-weight: 600;
+}
+
+.menuSep {
+  opacity: 0.5;
+}
+
+.menuModel {
+  opacity: 0.9;
+}
+
+.menuDivider {
+  height: 1px;
+  background: var(--c-border, #2a2f3a);
+  margin: 6px 0;
+}
+
+.varsList {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.varRow {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border, #2a2f3a);
+  border-radius: 10px;
+  background: var(--panel, #11151c);
+}
+
+.varName {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  color: #5afc9d;
+}
+
+/* color: #9aa4b2; */
+.varInput {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border, #9aa4b2);
+  border-radius: 8px;
+  background: #0c0f14;
+  color: #e5e7eb;
+}
+
+.varsActions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}

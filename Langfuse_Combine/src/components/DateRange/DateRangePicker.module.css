@@ -1,0 +1,77 @@
+.container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.filterButton {
+  background-color: #0f172a;
+  color: #cbd5e1;
+  border: 1px solid #334155;
+  padding: 7px 12px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.filterButton:hover {
+  background-color: #1e293b;
+}
+
+/* 프리셋 버튼을 위한 컨테이너 */
+.presetContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* 실제 select 태그는 보이지 않게 처리 */
+.presetSelect {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  line-height: inherit;
+  outline: none;
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  opacity: 0;
+}
+
+/* 화면에 보이는 버튼 모양의 텍스트 */
+.presetDisplay {
+  background-color: #0f172a;
+  color: #cbd5e1;
+  border: 1px solid #334155;
+  padding: 7px 32px 7px 12px; /* 화살표 공간 확보 */
+  border-radius: 6px;
+  font-size: 13px;
+  pointer-events: none; /* 클릭 이벤트가 select로 전달되도록 함 */
+  white-space: nowrap;
+}
+
+.presetContainer:hover .presetDisplay {
+    background-color: #1e293b;
+}
+
+/* 드롭다운 화살표 아이콘 */
+.presetArrow {
+  position: absolute;
+  right: 10px;
+  color: #94a3b8;
+  pointer-events: none;
+}

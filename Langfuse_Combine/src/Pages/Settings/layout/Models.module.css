@@ -1,0 +1,40 @@
+/* Models 페이지만 해당 */
+
+.priceCell {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.priceCell span {
+    color: #888;
+    margin-right: 4px;
+}
+
+.maintainerCell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.cloneButton {
+    padding: 6px 12px;
+    background-color: #020817;
+    border: 1px solid #2f415d;
+    color: #cbd5e1;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.cloneButton:hover {
+    background-color: #192333;
+}
+
+.cellCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+

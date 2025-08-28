@@ -1,0 +1,35 @@
+/* 중앙 정렬을 위한 컨테이너 */
+.contentContainer {
+    max-width: 1400px; /* 원하는 최대 너비 */
+    margin: 0 auto;    /* 수평 중앙 정렬 */
+    padding: 0 24px;   /* 좌우 여백 */
+    box-sizing: border-box;
+}
+
+/* 헤더 배경 (화면 전체 너비) */
+.headerWrapper {
+    background: #1a2333;
+    border-bottom: 1px solid #333;
+}
+
+/* 헤더 글자 스타일 */
+.headerTitle {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #c2d4e5;
+    padding: 10px 0; /* 위아래 여백 */
+}
+
+/* 본문 레이아웃 (사이드바 + 내용) */
+.bodyLayout {
+    display: flex;
+    margin-top: 32px;
+    gap: 24px; /* 사이드바와 내용 사이의 간격 */
+}
+
+/* 헤더 아래 콘텐츠 (중앙 정렬) */
+.centeredContent {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+}

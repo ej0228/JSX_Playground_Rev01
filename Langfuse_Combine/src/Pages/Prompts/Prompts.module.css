@@ -1,0 +1,274 @@
+/* 기본 컨테이너 */
+.container {
+  color: #f8fafc; /* 기본 텍스트 색상 */
+  background-color: #020817; /* 페이지 배경색 */
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 1. 헤더 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title h1 {
+  font-size: 24px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.infoIcon {
+  color: #64748b; /* 아이콘 색상 */
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.secondaryButton,
+.primaryButton {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #334155;
+  background-color: #1e293b;
+  color: #f1f5f9;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.primaryButton {
+  background-color: #4f46e5; /* 주요 버튼 색상 */
+  border-color: #4f46e5;
+}
+
+.secondaryButton:hover,
+.primaryButton:hover {
+  filter: brightness(1.1);
+}
+
+/* 2. 툴바 */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filterButton {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #334155;
+  background-color: #0f172a; /* 필터 버튼 배경색 변경 */
+  color: #f1f5f9;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* 3. 테이블 */
+.tableContainer {
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 13px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.table th {
+  color: #94a3b8;
+  font-weight: 500;
+  background-color: #020817; /* th 배경색 변경 */
+}
+
+.table th:first-child,
+.table td:first-child {
+  padding-left: 24px;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.nameCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+}
+
+/* Observation Cell 스타일 수정 */
+.observationCell {
+  background-color: #374151; /* 이미지와 유사한 회색 배경 */
+  color: #e5e7eb;
+  border-radius: 9999px; /* 원형에 가까운 타원 */
+  padding: 2px 10px;
+  font-size: 12px;
+  min-width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.tagsCell {
+  display: flex;
+  gap: 6px; /* 태그 사이의 간격을 추가합니다. */
+  align-items: center;
+}
+
+/* ✅ 아래 tagPill 스타일을 파일 하단에 추가해주세요. */
+.tagPill {
+  background-color: #312e81; /* 이미지와 유사한 보라색 배경 */
+  color: #e0e7ff;             /* 밝은 텍스트 색상 */
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;        /* 태그 이름이 길어도 줄바꿈 방지 */
+}
+
+.actionCell {
+  display: flex;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  padding-right: 24px; /* 오른쪽 패딩 추가 */
+}
+
+.iconButton {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px; /* 호버 효과를 위한 radius */
+}
+
+.iconButton:hover {
+  background-color: #334155; /* 호버 시 배경색 */
+  color: white;
+}
+.iconButton:disabled {
+  color: #475569;
+  cursor: not-allowed;
+}
+
+
+/* 4. 페이지네이션 */
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 13px;
+  color: #94a3b8;
+  gap: 24px;
+}
+
+.rowsPerPage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rowsPerPage select {
+  background-color: #1e293b;
+  color: white;
+  border: 1px solid #334155;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+.pageControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+/* 상세 페이지 이동을 위한 링크 스타일 추가 */
+.promptLink {
+  color: #f1f5f9;
+  text-decoration: none;
+}
+
+.promptLink:hover {
+  text-decoration: underline;
+}
+
+.confirmationRow > td {
+  padding: 0;
+  border-top: none;
+  background-color: #020817; /* 테이블 배경색과 동일하게 */
+}
+
+.confirmationContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: #1e293b; /* 팝업 배경색 */
+  border-bottom: 1px solid #1e293b;
+}
+
+.confirmationContent {
+  /* 텍스트 영역 */
+}
+
+.confirmationTitle {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: #f1f5f9;
+}
+
+.confirmationText {
+  font-size: 13px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.confirmationText strong {
+  font-weight: 500;
+  color: #e2e8f0;
+}
+
+.deleteConfirmButton {
+  background-color: #be123c; /* 빨간색 계열 */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-left: 24px;
+}
+
+.deleteConfirmButton:hover {
+  background-color: #9f1239;
+}

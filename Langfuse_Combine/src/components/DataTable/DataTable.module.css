@@ -1,0 +1,120 @@
+/* 테이블 컨테이너 */
+.tableContainer {
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 13px;
+  border-bottom: 1px solid #1e293b;
+  /* white-space: nowrap; */
+}
+
+.table td {
+  color: #cbd5e1;
+}
+
+.table th {
+  color: #94a3b8;
+  font-weight: 500;
+  background-color: #020817;
+}
+
+.table th:first-child,
+.table td:first-child {
+  padding-left: 24px;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.actionsCell {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.emptyCell {
+  text-align: center;
+  color: #94a3b8;
+  padding: 48px;
+}
+
+.iconButton {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.iconButton:hover {
+  background-color: #334155;
+  color: white;
+}
+.iconButton:disabled {
+  color: #475569;
+  cursor: not-allowed;
+}
+
+/* 페이지네이션 */
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 13px;
+  color: #94a3b8;
+  gap: 24px;
+  border-top: 1px solid #1e293b;
+}
+
+.rowsPerPage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rowsPerPage select {
+  background-color: #1e293b;
+  color: white;
+  border: 1px solid #334155;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+.pageControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ▼▼▼ 즐겨찾기 아이콘 스타일 추가 ▼▼▼ */
+.starIcon {
+  color: #64748b;
+  cursor: pointer;
+}
+.favorited {
+  color: #facc15;
+  fill: #facc15;
+}
+
+.clickableRow {
+ cursor: pointer;
+ border-top: 1px solid transparent;
+}
+
+/* 🔽 마우스를 올렸을 때의 스타일 수정 */
+.clickableRow:hover {
+ background-color: #f1f4f86a !important;
+}

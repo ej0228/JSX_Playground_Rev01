@@ -1,0 +1,202 @@
+/* src/Tracing/ColumnVisibilityModal.module.css */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.modalContent {
+  background-color: #0f172a;
+  color: #f8fafc;
+  width: 350px;
+  height: 100%;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.3s ease-in-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #1e293b;
+  flex-shrink: 0;
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: #cbd5e1;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.closeButton:hover {
+  background-color: #1e293b;
+}
+
+.actionButton {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #334155;
+  background-color: #1e293b;
+  color: #cbd5e1;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 13px;
+}
+.actionButton:hover {
+  background-color: #334155;
+}
+
+.selectAllRow {
+  padding: 12px 24px;
+  border-bottom: 1px solid #1e293b;
+  flex-shrink: 0;
+}
+
+.selectAllLabel {
+  font-weight: 400;
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  flex-grow: 1;
+}
+
+.columnCount {
+  color: #64748b;
+  font-weight: 400;
+}
+
+.columnList {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 8px 24px;
+}
+
+.columnItem {
+  display: flex;
+  align-items: left;
+  padding: 10px 0;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 400; /* 글자 굵기를 normal(400)으로 설정 */
+}
+
+/* Custom Checkbox */
+.columnItem input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.columnItem input[type="checkbox"] + *::before {
+  content: '';
+  display: inline-block;
+  vertical-align: bottom;
+  width: 16px;
+  height: 16px;
+  margin-right: 12px;
+  border-radius: 4px;
+  border: 1px solid #4b5569;
+  background-color: #1e293b;
+}
+
+.columnItem input[type="checkbox"]:checked + *::before {
+  background-color: #a5b4fc;
+  border-color: #a5b4fc;
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+}
+
+/* Scores Group Item */
+.groupItem {
+  width: 100%;
+}
+
+.groupIcon {
+  color: #64748b;
+  margin-right: 12px;
+}
+
+.groupLabel {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.groupCount {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.groupAction {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #94a3b8;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.infoIcon {
+  margin-left: 6px;
+  color: #64748b;
+}
+
+.chevron {
+  transition: transform 0.2s ease-in-out;
+}
+
+.groupItemOpen {
+  border-bottom: 1px solid #1e293b;
+}
+
+.groupItemOpen .chevron,
+.chevronOpen {
+  transform: rotate(90deg);
+}
+
+.scoresDropdown {
+  padding-left: 10px;
+  margin-bottom: 10px;
+  border-left: 1px solid #1e293b;
+}
+
+.dropdownItem {
+  padding: 8px 0;
+}

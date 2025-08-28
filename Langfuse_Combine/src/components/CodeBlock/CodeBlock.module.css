@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  background-color: #010409;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 16px 0;
+  font-family: 'D2Coding', 'Courier New', monospace;
+  font-size: 13px;
+  min-height: 120px;
+  flex-grow: 1;
+}
+
+.lineNumbers {
+  text-align: right;
+  color: #7d8590;
+  padding: 0 12px;
+  user-select: none;
+  border-right: 1px solid #30363d;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+}
+
+.lineNumbers span {
+    line-height: 1.5;
+}
+
+.code {
+  margin: 0;
+  padding: 0 16px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: #c9d1d9;
+  line-height: 1.5;
+  
+  /* ▼▼▼ textarea를 위한 스타일 추가 ▼▼▼ */
+  flex-grow: 1;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+}

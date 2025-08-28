@@ -1,0 +1,184 @@
+/* 기존 유지 */
+.chatEditor {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: #020817;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.hint {
+  font-size: 13px;
+  color: #94a3b8;
+  background: #0b1220;
+  border: 1px dashed #334155;
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+
+/* 공통 높이 변수(선택) */
+:root {
+  --row-h: 36px;
+  --role-col-w: 130px;
+  --remove-col-w: 40px;
+  /* ⬅ X 버튼 칸을 조금 넓힘 */
+}
+
+/* 행을 grid로 바꿔 정렬을 안정화(라벨/입력/X 정렬) */
+.messageRow {
+  display: grid;
+  grid-template-columns: 28px var(--role-col-w) 1fr var(--remove-col-w);
+  align-items: start;
+  gap: 8px;
+}
+
+.dragHandleWrapper {
+  cursor: move;
+  padding-top: 6px;
+}
+
+.dragHandle {
+  color: #64748b;
+}
+
+/* 역할 칼럼 기본 높이 동일화 */
+.roleCol {
+  display: flex;
+  align-items: center;
+  height: var(--row-h);
+}
+
+/* select 그대로 유지 */
+.roleSelect {
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 4px;
+  color: #cbd5e1;
+  font-size: 13px;
+  padding: 6px 8px;
+  width: 100%;
+  height: var(--row-h);
+  box-sizing: border-box;
+}
+
+/* ✅ placeholder 라벨을 select 같은 블록 형태로 변경 */
+.placeholderRole {
+  width: 100%;
+  height: var(--row-h);
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 8px;
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 4px;
+  /* pill → 사각형 */
+  color: #cbd5e1;
+  font-size: 13px;
+  box-sizing: border-box;
+  text-transform: lowercase;
+  /* 'placeholder' 표기 유지 */
+}
+
+/* 입력열 */
+.inputCol {
+  width: 100%;
+}
+
+/* ⬇ 인풋/텍스트영역이 자신의 칸을 넘지 않도록 */
+.messageTextarea,
+.placeholderInput {
+  width: 100%;
+  box-sizing: border-box;
+  /* ✅ 겹침 방지 핵심 */
+}
+
+/* textarea / input 공통 스타일 유지 + 높이 정합 */
+.messageTextarea {
+  min-height: var(--row-h);
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 4px;
+  color: #e2e8f0;
+  font-size: 14px;
+  padding: 6px 10px;
+  resize: vertical;
+}
+
+.placeholderInput {
+  height: var(--row-h);
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 4px;
+  color: #e2e8f0;
+  font-size: 14px;
+  padding: 0 10px;
+}
+
+/* 닫힘 버튼: 칼럼 넓힌 만큼 버튼도 살짝 키움 */
+.removeButton {
+  background: none;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: #94a3b8;
+  cursor: pointer;
+  height: var(--row-h);
+  width: var(--remove-col-w);
+  display: grid;
+  place-items: center;
+  margin-top: 0;
+}
+
+.removeButton:hover {
+  color: #ef4444;
+  background: #0b1220;
+}
+
+.chatActions {
+  display: flex;
+  gap: 12px;
+  /* 버튼 사이 간격 조금 넉넉히 */
+  margin-top: 12px;
+}
+
+.addBtn {
+  /* 반반 너비로 동일 크기 */
+  flex: 1;
+  min-width: 0;
+  /* flex 수축 시 내용이 넘치지 않게 */
+  height: 44px;
+  /* 3000 화면과 비슷한 높이 */
+  display: inline-flex;
+  /* 가운데 정렬을 위해 inline-flex */
+  align-items: center;
+  justify-content: center;
+
+  /* 스타일 */
+  background: #0f172a;
+  border: 1px solid #334155;
+  color: #94a3b8;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0 14px;
+  /* 좌우 여백 */
+  border-radius: 8px;
+  /* pill 대신 직사각에 가까운 둥근 모서리 */
+  /* transition: background .15s, color .15s, border-color .15s; */
+}
+
+/* .addBtn:hover {
+  color: #e2e8f0;
+  background: #0b1220;
+  border-color: #3b82f6;
+ 
+} */
+
+/* 포커스 접근성(선택) */
+.addBtn:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}

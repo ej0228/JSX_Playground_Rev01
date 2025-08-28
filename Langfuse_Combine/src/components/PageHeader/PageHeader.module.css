@@ -1,0 +1,177 @@
+:root {
+    --pad-x: 24px;
+    --h-top: 48px;
+    --h-bottom: 48px;
+    --max-w: 1440px;
+
+    --c-text: #e5e7eb;
+    --c-muted: #94a3b8;
+    --c-line: #1e293b;
+    --c-top: #020817;
+    --c-bottom: #0e1628;
+
+    --c-chip-bg: #374151;
+    --c-chip-text: #d1d5db;
+    --c-chip-br: #1f2937;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    color: var(--c-text);
+    background: transparent;
+}
+
+/* strips */
+.topRow {
+    background: var(--c-top);
+    border-bottom: 1px solid var(--c-line);
+}
+
+.bottomRow {
+    background: var(--c-bottom);
+    border-bottom: 1px solid var(--c-line);
+}
+
+/* inner row (기본: 가운데 정렬 + 좌우 패딩) */
+.rowInner {
+    min-height: var(--h-top);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px var(--pad-x);
+    margin: 0 auto;
+    max-width: var(--max-w);
+}
+
+/* ✅ flushLeft: 사이드바에 완전 붙이기 (단위 수정) */
+.flush .rowInner {
+    padding-left: 8px;
+    /* ← 여기 고침 */
+    margin-left: 8px;
+    /* ← 여기 고침 */
+    max-width: none;
+}
+
+.toggleButton {
+    background: none;
+    border: none;
+    color: var(--c-muted);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.toggleButton:hover {
+    color: #ffffff;
+    background: rgba(148, 163, 184, .08);
+}
+
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.crumbBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 6px;
+    background: transparent;
+    border: none;
+    color: #93c5fd;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.crumbBtn:hover {
+    background: rgba(148, 163, 184, .08);
+}
+
+.tag {
+    background: var(--c-chip-bg);
+    color: var(--c-chip-text);
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 12px;
+    border: 1px solid var(--c-chip-br);
+}
+
+.separator {
+    color: var(--c-text);
+    opacity: .9;
+}
+
+.chev {
+    opacity: .9;
+}
+
+.topRight {
+    margin-left: auto;
+}
+
+.pageTitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.titleText {
+    word-break: break-word;
+}
+
+.infoDot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--c-muted);
+}
+
+.rightActions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ✅ 클릭 요소 커서/상태 */
+.rightActions :is(button, a, [role="button"]) {
+    cursor: pointer;
+}
+
+.rightActions :is(button, a, [role="button"]):hover {
+    filter: brightness(1.06);
+}
+
+.rightActions :is(button, a, [role="button"]):disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* (선택) 포커스 표시
+.rightActions :is(button, a, [role="button"]):focus-visible { outline: 2px solid #7aa2ff; outline-offset: 2px; }
+*/
+
+@media (max-width: 640px) {
+    :root {
+        --pad-x: 16px;
+    }
+
+    .breadcrumbs {
+        font-size: 13px;
+    }
+
+    .pageTitle {
+        font-size: 16px;
+    }
+}

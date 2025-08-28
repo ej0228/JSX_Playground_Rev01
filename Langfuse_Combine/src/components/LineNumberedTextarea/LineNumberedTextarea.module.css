@@ -1,0 +1,49 @@
+.editorWrapper {
+  position: relative;
+  display: flex;
+  background-color: #020817;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.editorWrapper:focus-within {
+  border-color: #4f46e5;
+}
+
+.lineNumbers {
+  font-family: 'D2Coding', monospace;
+  font-size: 14px;
+  text-align: right;
+  color: #64748b;
+  padding: 0 12px;
+  user-select: none;
+  line-height: 1.5;
+}
+
+.textarea {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e2e8f0;
+  font-size: 14px;
+  font-family: 'D2Coding', monospace;
+  resize: none;
+  padding: 0;
+  line-height: 1.5;
+  min-height: inherit;
+}
+
+/* 자식 요소(예: 버튼)를 오른쪽 상단/하단에 위치시키기 위한 래퍼 */
+.childrenWrapper {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}

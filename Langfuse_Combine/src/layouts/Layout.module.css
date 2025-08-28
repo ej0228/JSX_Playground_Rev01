@@ -1,0 +1,223 @@
+.layout {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background-color: #020817;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #020817;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: width 0.3s ease;
+    border-right: 1px solid #1e293b;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sidebar {
+    transition: none;
+  }
+}
+
+.sidebarCollapsed {
+  width: 60px;
+}
+
+/* [1] 상단 고정 영역 */
+.header {
+  padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logoText {
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+    gap: 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #1e293b;
+}
+
+.divider {
+    height: 1px;
+    background-color: #020817;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.searchBox {
+  /* margin-top: 12px; */
+  display: flex;
+  align-items: center;
+    justify-content: space-between;
+  gap: 6px;
+  padding: 6px 10px;
+  background-color: #020817;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #cbd5e1;
+}
+
+.searchBox:hover {
+    background-color: #1c2738;
+}
+
+.searchText {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+}
+
+.hotkey {
+    background-color: #020817;
+    border: 1px solid #4b5563;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+/* [2] 스크롤 가능한 메뉴 영역 */
+.menuWrapper {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+/* 커스텀 스크롤바 (WebKit/Chromium) */
+.menuWrapper::-webkit-scrollbar {
+  width: 8px;
+}
+.menuWrapper::-webkit-scrollbar-thumb {
+  background: #1f2a44;
+  border-radius: 6px;
+}
+.menuWrapper::-webkit-scrollbar-thumb:hover {
+  background: #2a3a5c;
+}
+.menuWrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sectionTitle {
+  font-size: 11px;
+  color: #94a3b8;
+  padding: 6px 16px 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sectionDivider {
+  height: 6px;
+}
+
+.menuItem {
+  position: relative;
+  padding: 8px 14px 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  transition: background 0.2s ease;
+    border-radius: 6px;
+}
+
+.menuItem:hover {
+  background-color: #223049;
+
+}
+
+/* ✅ NavLink 활성 상태 */
+.active {
+  background-color: #1e293b;
+}
+
+/* 왼쪽 하이라이트 바 */
+.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  background-color: #60a5fa;
+  border-radius: 2px;
+}
+
+/* 키보드 포커스 시 접근성 강화 */
+.menuItem:focus-visible {
+  outline: 2px solid #64748b;
+  outline-offset: 2px;
+}
+
+.iconOnly {
+  justify-content: center;
+}
+
+/* [3] 하단 고정 영역 */
+.bottomMenu {
+  padding: 8px 0;
+}
+
+.userInfo {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  border-top: 1px solid #1e293b;
+}
+
+.userAvatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.userText {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-size: 13px;
+}
+
+.userEmail {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+/* 메인 콘텐츠 */
+.mainContainer {
+  flex-grow: 1;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #020817;
+  /* ▼▼▼ 아래 두 줄을 추가합니다. ▼▼▼ */
+  position: relative;
+  z-index: 1;
+}

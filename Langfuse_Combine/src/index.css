@@ -1,0 +1,430 @@
+* {
+    font-family: 'Pretendard', sans-serif !important;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+  background-color: #1e1e2f; /* 전체 배경색 어둡게 설정 */
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code,
+code span,
+.monaco-editor .view-line,
+.monaco-editor .view-line span {
+    font-family: D2Coding, NanumGothicCoding, source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace !important;
+    font-size: 0.9rem;
+}
+
+.no_dot {
+    list-style-type: none;
+}
+
+/* :root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */
+
+
+/* SCROLL */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+/* 스크롤바의 width */
+::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+}
+
+/* 스크롤바의 전체 배경색 */
+::-webkit-scrollbar-thumb {
+    height: 30%;
+    /* 스크롤바의 길이 */
+    background: #adabab;
+    /*linear-gradient(to bottom, #1697bf, #62b7ac); */
+    border-radius: 10px;
+}
+
+/* 스크롤바 색 */
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* 공통 */
+
+
+/* override */
+/*Inputlabel*/
+.MuiInputLabel-root {
+    margin-top: -9px;
+    font-size: 0.9rem !important;
+}
+
+.MuiInputLabel-shrink {
+    margin-top: 0px !important;
+    font-size: 1rem !important;
+}
+
+/*winiSelect*/
+.winiselect {
+    min-height: 32.5px;
+    background-color: white;
+}
+
+.winiselect.singleline .MuiSelect-select{
+    padding: 4.5px 14px;
+    font-size: 13px !important;
+}
+.winiselect.singleline.MuiInputBase-multiline {
+    padding: 6.91px 14px;
+    font-size: 13px !important;
+}
+.winiselect  .Mui-disabled {
+    background-color: #f3f3f3;
+    ;
+}
+/* selectbox 감싸고있는 컨트롤 */
+
+@media (max-width: 1600px) {
+    .winiselectForm{
+        width:100%;
+    }  
+}
+@media (min-width: 1600px) {
+    .winiselectForm{
+        width: 200px;;
+    }    
+}
+
+/*BottomNavigationAction*/
+.MuiBottomNavigationAction-label {
+    max-width: 100;
+    font-size: 1rem
+}
+
+.MuiBottomNavigationAction-label.Mui-selected {
+    font-size: 1.4rem
+}
+
+/*WiniButton*/
+.Wini_default_Button_Height,
+.Wini_default_Button_Height Button {
+    /* height: 32px; */
+    font-size: 13px;
+    margin: 8px;
+    /* margin-top: 2px !important; */
+    /* margin-top:9px; */
+    /* padding-top: 10px;
+    padding-Bottom: 6.5px; */
+}
+.MuiButton-sizeSmall{
+    min-height: 32px;
+    /* margin-top: 2px; */
+}
+/* winiText */
+.MuiTextField-root {
+    margin: 4px;
+}
+.MuiTextField-root >div{
+    background-color: white;
+}
+
+.labelRoot {
+    font-size: 1rem;
+}
+
+.labelFocus {
+    margin-top: 0px;
+    font-size: 1rem !important;
+}
+
+.Wini_default_TextField_Height {
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+/* .Wini_default_TextField_Height label{
+  font-size: 1rem;
+} */
+.Wini_default_TextField_Height input {
+    height: 16px;
+    font-size: 13px;
+    padding-top: 10px;
+    padding-Bottom: 6.5px;
+    background-color: white;
+}
+.winitext:has(>.Mui-disabled) > div,
+.Wini_default_TextField_Height > .Mui-disabled input,
+.Wini_default_TextField_Height > .Mui-disabled textarea{
+    background-color: #f3f3f3;
+}
+
+.Wini_default_TextField_Height textarea {
+    font-size: 13px;
+    background-color: white;
+}
+
+/* override */
+.MuiInputLabel-root {
+    margin-top: -9px;
+    font-size: 0.9rem !important;
+}
+
+.MuiInputLabel-shrink {
+    margin-top: 0px !important;
+    font-size: 1rem !important;
+}
+/*datetimepicker*/
+.winidatetimepicker > .Mui-disabled{
+    background-color: #f3f3f3;
+}
+/*winitreeitem */
+.WiniTreeItem-label_mui {
+    font-size: 15px !important;
+}
+/*checkbox*/
+.MuiCheckbox-root{
+    padding:4px 9px !important;
+}
+.MuiFormControlLabel-root .MuiFormControlLabel-label{
+    font-size:0.9rem;
+}
+.winicheckbox input{
+    z-index: 2;
+}
+
+/*msgbox*/
+.globalMsgBox .MuiPaper-root {
+    min-width: 250px;
+}
+
+/* .globalmodal_background {
+  background-color:rgba(0, 0, 0, 0.5);
+}
+.globalMsgBox .MuiBackdrop-root {
+  background-color:transparent;
+}
+.globalMsgBox .MuiPaper-root{
+  box-shadow: none;
+  border:1px solid #adadad;
+  background-color: #f1f1f1
+} */
+/*모달 다중 백그라운드 없애기*/
+.globalMsgBox.MuiDialog-root[aria-hidden=true] .MuiBackdrop-root {
+    background-color: transparent;
+}
+
+.globalMsgBox.MuiDialog-root[aria-hidden=true] .MuiPaper-root {
+    box-shadow: none;
+}
+
+/*WiniEditor 이미지*/
+.wini-editor-inline-image-placeholder {
+    display: none;
+    color: #666;
+    background: #f9f9f9;
+    padding: 1rem 2rem;
+    margin: 0;
+    border-radius: .5rem;
+}
+
+.wini-editor-inline-image--loading+.wini-editor-inline-image-placeholder,
+.wini-editor-inline-image--error+.wini-editor-inline-image-placeholder {
+    display: inline-block;
+}
+
+.wini-editor-inline-image--loading+.wini-editor-inline-image-placeholder:after {
+    /*content: '로딩중입니다';*/
+}
+.wini-editor-inline-image--loading+.wini-editor-inline-image-placeholder .wini-editor-inline-image-placeholder__icon {
+    display: block;
+    margin: .25rem auto;
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgb(46, 125, 50, 0.2);
+    box-sizing: border-box;
+    border-top-color: #2e7d32;
+    border-radius: 100%;
+
+    animation: mainrotate 1s ease-in-out infinite;
+}
+
+.wini-editor-inline-image--error {
+    display: none;
+}
+.wini-editor-inline-image--error+.wini-editor-inline-image-placeholder:after {
+    content: '이미지를 불러오는데 실패했습니다.';
+    cursor: pointer;
+}
+.wini-editor-inline-image--error+.wini-editor-inline-image-placeholder .wini-editor-inline-image-placeholder__icon {
+    display: block;
+    margin: .25rem auto;
+    width: 24px;
+    height: 24px;
+    border: none;
+    animation: none;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>') no-repeat;
+}
+/*WiniEditor 편집 중 이미지 오류 처리*/
+.toastui-editor.ww-mode .wini-editor-inline-image--error {
+    display: inline-block;
+    min-width: 100px;
+    min-height: 24px;
+    background: #f9f9f9 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>') no-repeat;
+    background-size: 24px 24px;
+    background-position: center center;
+    border-radius: .5rem;
+}
+
+/* Toast UI Editor 본문 폰트 사이즈 */
+.toastui-editor-contents {
+    font-size: 1rem !important; 
+}
+  /* 에디터 입력 영역 폰트 사이즈 */
+.toastui-editor-md-container, .toastui-editor-ww-container {
+    font-size: 1rem !important;  
+}
+.toastui-editor-popup-add-image > .toastui-editor-popup-body > div > label,
+.toastui-editor-popup-add-image #toastuiAltTextInput {
+    display: none;
+}
+/*editor 번호매기기 가로길이 오류*/
+.toastui-editor-contents ol>li:before {
+    width:25px !important;
+}
+.toastui-editor-contents{
+    padding: 0px 3px !important;
+}
+/*에디터 코드 글자사이즈*/
+.toastui-editor-contents code{
+    font-size: 0.9rem;
+}
+/*에디터 코드 글자높인*/
+.toastui-editor-contents *:not(table){
+    line-height: 133% !important;
+}
+
+/*ag grid*/
+
+.ag-checkbox-edit,
+.ag-checkbox-cell{
+    /* aggrid checkbox 중간정렬, edit 시에 중간정렬 */
+    justify-content: center;
+    padding-right:0;
+}
+.ag-header-group-cell-label,
+.ag-header-cell-label {
+    justify-content: center;
+}
+.ag-input-field-input[type="checkbox"]{
+    margin:0px;
+}
+/*Dialogcontent*/
+.winidialogcontent{
+    padding-top:4px !important;
+}
+
+/*레이아웃 서치바 searchbar search-bar*/
+.winistack .wini-Search-bar,
+.winigridlayout .wini-Search-bar,
+.winibox .wini-Search-bar {
+    flex-grow: 1;
+    background-color: #fbfafa;
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+    padding:4px 6px;
+    display: flex;
+    align-items: center;
+}
+/* 이부분은 편의인데 아니다싶으면 지워버리자*/
+.winistack .wini-Search-bar > div,
+.winibox .wini-Search-bar > div,
+.winigridlayout .wini-Search-bar > div
+{
+    margin-top:4px;
+}
+.winistack .wini-Search-bar > button,
+.winibox .wini-Search-bar > button,
+.winigridlayout .wini-Search-bar > button{
+    margin-top: 3px;
+}
+.winistack .wini-Search-bar > div:has(> .winibutton),
+.winibox .wini-Search-bar > div:has(> .winibutton),
+.winigridlayout .wini-Search-bar > div:has(> .winibutton){
+    margin-top: 2px;
+}
+/* /.winitext:has(>.Mui-disabled) > div */
+/* .winigridlayout:has(> .winibutton){
+    margin-top: 3px;
+} */

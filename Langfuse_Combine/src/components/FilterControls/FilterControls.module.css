@@ -1,0 +1,5 @@
+/* src/components/FilterControls/FilterControls.module.css */
+.filterControls {
+  display: flex;
+  gap: 8px;
+}

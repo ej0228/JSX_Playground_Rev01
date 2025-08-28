@@ -1,0 +1,299 @@
+/* src/Pages/Tracing/TraceDetailView.module.css */
+.body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.infoBar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* 섹션 간 간격 */
+  font-size: 13px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #30363d;
+}
+
+.infoBarTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* 공간 부족 시 줄바꿈 허용 */
+  gap: 12px;
+}
+
+.infoBarTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #c9d1d9;
+  /* 제목이 너무 길 경우 줄어들도록 설정 */
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.traceName {
+  font-size: 20px; /* 크기 조정 */
+  font-weight: 500;
+  margin: 0;
+  color: #e6edf3;
+  font-family: 'D2Coding', 'Courier New', monospace;
+  /* 이름이 길어도 한 줄로 표시하고 ...으로 생략 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.idButton {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: #7d8590;
+  cursor: pointer;
+  font-size: 13px; /* 크기 조정 */
+  font-family: 'D2Coding', 'Courier New', monospace;
+  padding: 0;
+}
+.idButton:hover {
+  color: #c9d1d9;
+}
+
+.infoBarActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0; /* 액션 버튼은 줄어들지 않음 */
+}
+
+.actionButton, .actionButtonSecondary {
+  background-color: #21262d;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.actionButton:hover, .actionButtonSecondary:hover {
+  border-color: #8b949e;
+}
+
+.actionButtonSecondary {
+  padding: 8px; /* 아이콘 버튼 패딩 조정 */
+}
+
+.annotateButton {
+  display: flex;
+}
+.annotateButton button {
+  background-color: #21262d;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.annotateButton .annotateButtonChevron {
+  background-color: #21262d;
+  border: 1px solid #30363d;
+  border-left: none;
+  color: #c9d1d9;
+  padding: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.annotateButton:hover button, .annotateButton:hover .annotateButtonChevron {
+  border-color: #8b949e;
+}
+
+.infoBarBottom {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.timestamp {
+  color: #c9d1d9; /* 폰트 색상 변경 */
+  font-size: 14px; /* 폰트 크기 변경 */
+  font-family: 'D2Coding', 'Courier New', monospace;
+}
+
+.pills {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pill {
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pillUser {
+  background-color: #e6edf3;
+  color: #0d1117;
+}
+
+.pillDark {
+  background-color: #30363d;
+  color: #e6edf3;
+}
+
+.costBar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.costPill {
+  background-color: #30363d;
+  color: #e6edf3;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.infoIcon {
+  color: #7d8590;
+}
+
+/* --- 나머지 스타일은 이전과 동일하게 유지 --- */
+.contentCard {
+  background-color: #010409;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.cardHeader {
+  position: relative;
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cardTitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: #e6edf3;
+}
+.cardBody {
+  padding: 16px;
+  font-size: 13px;
+  max-height: 250px;
+  overflow-y: auto;
+  border-top: 1px solid #30363d;
+}
+.cardBody pre {
+  margin: 0;
+  font-family: 'D2Coding', 'Courier New', monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #c9d1d9;
+}
+.noDataText {
+  color: #7d8590;
+}
+.formatToggle {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: -8px;
+  margin-right: 16px;
+  position: relative;
+  z-index: 2;
+}
+.toggleButton {
+  background-color: #21262d;
+  border: 1px solid #30363d;
+  color: #7d8590;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.toggleButton:first-of-type {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  border-right: none;
+}
+.toggleButton:last-of-type {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.toggleButton.active {
+  background-color: #0d1117;
+  color: #e6edf3;
+}
+.copyButton {
+  background: none;
+  border: none;
+  color: #7d8590;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+.copyButton:hover {
+  background-color: #30363d;
+  color: #e6edf3;
+}
+.outputCard {
+  border-left: 4px solid #3fb950;
+}
+.outputCard .cardBody {
+  background-color: #0d1117;
+}
+.formattedTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  font-family: 'D2Coding', 'Courier New', monospace;
+}
+.formattedTable th {
+  text-align: left;
+  padding: 8px 4px;
+  color: #7d8590;
+  font-weight: 500;
+  border-bottom: 1px solid #30363d;
+}
+.formattedTable td {
+  padding: 8px 4px;
+  border-bottom: 1px solid #30363d;
+}
+.formattedTable tr:last-child td {
+  border-bottom: none;
+}
+.pathCell {
+  color: #7d8590;
+  width: 150px;
+  vertical-align: top;
+}
+.valueCell {
+  color: #c9d1d9;
+}

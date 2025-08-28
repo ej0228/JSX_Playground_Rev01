@@ -1,0 +1,113 @@
+/* Settings 페이지에서 공통으로 사용하는 스타일 */
+
+/* 페이지 기본 컨테이너 */
+.container {
+    padding: 0 24px;
+}
+
+/* h3 제목 */
+.title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #c3d4e5;
+}
+
+/* p */
+.p {
+    margin: 0 0 16px 0;
+    color: #c3d4e5;
+    font-size: 13px;
+}
+
+/* 기본 섹션 */
+.section {
+    border: 1px solid #2f415d;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 24px;
+    background-color: #020817;
+}
+
+/* 기본 입력창 */
+.input {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: #020817;
+    border: 1px solid #2f415d;
+    border-radius: 4px;
+    color: #fff;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+}
+
+.input:focus {
+    color: #fff;
+    outline: 1px solid #4f46e5;
+    border-color: #4f46e5;
+}
+
+/* 기본 버튼 */
+.button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #1e293b;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+.button:disabled {
+    background-color: #101828;
+    color: #64768b;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* "+ Create new..." 형태의 버튼 */
+.createButton {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 24px;
+    padding: 8px 14px;
+    background-color: #1e293b;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.createButton:hover {
+    background-color: #444;
+ }
+
+ /* 테이블 형태 리스트 (API Keys, LLM Connections 등) */
+.keyList {
+    border: 1px solid #2f415d;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.keyRow {
+    display: grid;
+    /* 컬럼 수는 각 페이지에서 오버라이드 */
+    grid-template-columns: 1fr 2fr 3fr 1.5fr 1fr;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #333;
+    font-size: 13px;
+}
+
+.keyList > *:last-child {
+    border-bottom: none;
+}
+
+.keyHeader {
+    background-color: #020817;
+    color: #c3d4e5;
+    font-weight: 500;
+}

@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.message {
+  font-size: 14px;
+  color: #cbd5e1; /* slate-300 */
+  line-height: 1.5;
+  margin: 0;
+}
+
+.message strong {
+  color: #f1f5f9; /* slate-100 */
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 14px;
+  border: 1px solid transparent;
+}
+
+.cancelButton {
+  background-color: #1e293b; /* slate-800 */
+  border-color: #334155; /* slate-700 */
+  color: #f1f5f9; /* slate-100 */
+}
+
+.cancelButton:hover {
+  background-color: #334155; /* slate-700 */
+}
+
+.primaryButton {
+  background-color: #f8fafc; /* slate-50 */
+  color: #0f172a; /* slate-900 */
+}
+.primaryButton:hover {
+    filter: brightness(0.9);
+}
+
+.dangerButton {
+  background-color: #dc2626; /* red-600 */
+  color: white;
+}
+.dangerButton:hover {
+    background-color: #b91c1c; /* red-700 */
+}

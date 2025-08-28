@@ -1,0 +1,42 @@
+/* src/components/FilterControls/TimeRangeFilter.module.css */
+.container {
+  position: relative;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 8px;
+  z-index: 10;
+  width: 180px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #cbd5e1;
+}
+.dropdownItem:hover {
+  background-color: #1e293b;
+}
+
+.dropdownItem.selected {
+  background-color: #334155;
+  color: #f1f5f9;
+}
+
+.checkmark {
+  color: #a78bfa;
+  width: 16px;
+  text-align: center;
+}
