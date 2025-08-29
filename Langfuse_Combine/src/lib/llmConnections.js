@@ -1,14 +1,12 @@
-// src/lib/llmConnections.js — Langfuse tRPC 클라이언트 (배치 OFF, v11 호환)
-// 변경점:
-// - 단건 POST만 사용
-// - 1차 포맷 A: { json: { input: {...} } } → 실패 시
-// - 2차 포맷 B: { json: { method:"mutation", params:{ path, input } } }
-// - projectId는 항상 body의 input에 포함, URL 쿼리에 넣지 않음
-// - 응답은 { result: { data: { json } } } / { json } 모두 대응
+// src/lib/llmConnections.js — tRPC v11 단건 호출 클라이언트 (env fallback 제거 버전)
+// - projectId는 반드시 호출자가 opts.projectId로 넘겨줘야 함 (없으면 throw)
+// - 단건 POST만 사용, 포맷 A 실패 시 포맷 B 재시도
+// - 응답은 { result: { data: { json } } } / { json } 둘 다 대응
+// - 입력 정규화(키 호환), extraHeaders 배열/객체 변환 지원
 
-import { api } from "./api";
+import { api } from "./api"; // 프로젝트에 있는 공용 fetch 래퍼. 없다면 window.fetch로 바꿔도 OK.
 
-/* 헤더 배열 → 레코드 */
+/* 배열 형태의 헤더 → 레코드 형태로 */
 function headersArrayToRecord(arr = []) {
   const out = {};
   for (const h of arr) {
@@ -19,7 +17,7 @@ function headersArrayToRecord(arr = []) {
   return out;
 }
 
-/* 입력 정규화: 레거시/다양한 키 대응 */
+/* 입력 정규화: 다양한 키 이름을 하나로 합치기 */
 function normalizeInput(input = {}) {
   return {
     name: input.name ?? input.provider ?? "",
@@ -31,6 +29,7 @@ function normalizeInput(input = {}) {
       input.useDefaultModels ??
       input.withDefaultModels ??
       true,
+    // extraHeaders는 배열/객체 모두 허용
     extraHeaders: Array.isArray(input.extraHeaders)
       ? input.extraHeaders
       : Object.entries(input.extraHeaders || {}).map(([key, value]) => ({ key, value })),
@@ -38,60 +37,91 @@ function normalizeInput(input = {}) {
   };
 }
 
-/* tRPC 호출 헬퍼 - 단건 호출(배치X), v11 호환 포맷 A→B 재시도 */
-async function callTrpc(procedure, input) {
-  const envProjectId = import.meta.env.VITE_DEFAULT_PROJECT_ID;
-  const projectId = input?.projectId || envProjectId;
+/* tRPC 호출 헬퍼(단건, 배치X) — 포맷 A → 실패 시 B 재시도 */
+async function callTrpc(procedure, payload, projectId) {
   if (!projectId) {
-    throw new Error("projectId가 비어있습니다 (.env VITE_DEFAULT_PROJECT_ID 확인)");
+    throw new Error("projectId가 없습니다 (호출 시 opts.projectId를 반드시 전달하세요)");
   }
-  const payload = { ...input, projectId };
-  const url = `/api/trpc/${procedure}`;
 
-  const common = {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      accept: "application/json",
-      "content-type": "application/json",
-      "x-project": projectId,
-      "x-project-id": projectId,
-    },
+  const headers = {
+    accept: "application/json",
+    "content-type": "application/json",
+    "x-project": projectId,
+    "x-project-id": projectId,
   };
 
-  // ── 1차: v11 단건 포맷 A  { json: { input } }
-  let res = await api(url, { ...common, json: { json: { input: payload } } });
-  let text = await res.text();
-  console.log(`[tRPC:A] ${procedure} (${res.status}):`, text);
-  let parsedA;
-  try { parsedA = JSON.parse(text); } catch { parsedA = undefined; }
+  // 서버가 기대하는 payload 래핑: ★★★ 핵심
+  const wrap = (p) => ({ json: p });                    // { json: { ... } }
+  const wrapInput = (p) => ({ json: { input: p } });    // { json: { input: ... } }  (fallback 용)
+  const wrapBatch = (p, method) => ([
+    {
+      id: 1,
+      json: {
+        method,                                         // "mutation" | "query"
+        params: { input: { json: p } },                 // { input: { json: ... } }
+      },
+    },
+  ]);
 
-  if (res.ok && (parsedA?.result?.data?.json !== undefined || parsedA?.json !== undefined)) {
-    return parsedA?.result?.data?.json ?? parsedA?.json ?? parsedA;
+  // ---- 1차: v11 단건 포맷 (권장)  body = { json: payload }
+  {
+    const res = await api(`/api/trpc/${procedure}`, {
+      method: "POST",
+      headers,
+      json: wrap(payload),
+      credentials: "include",
+    });
+    const text = await res.text();
+    let body; try { body = JSON.parse(text); } catch { }
+    if (res.ok && (body?.result?.data?.json !== undefined || body?.json !== undefined)) {
+      return body?.result?.data?.json ?? body?.json ?? body;
+    }
+    // 400 등 에러라도 다음 케이스로 폴백
   }
 
-  // ── 2차: v11 단건 포맷 B  { json: { method, params:{ path, input } } }
-  res = await api(url, {
-    ...common,
-    json: { json: { method: "mutation", params: { path: procedure, input: payload } } },
-  });
-  text = await res.text();
-  console.log(`[tRPC:B] ${procedure} (${res.status}):`, text);
-  let parsedB;
-  try { parsedB = JSON.parse(text); } catch { parsedB = undefined; }
-
-  if (res.ok && (parsedB?.result?.data?.json !== undefined || parsedB?.json !== undefined)) {
-    return parsedB?.result?.data?.json ?? parsedB?.json ?? parsedB;
+  // ---- 2차: httpBatchLink 포맷 (batch=1)  body = [ { id, json:{ method, params:{ input:{ json: payload }}} }]
+  {
+    const isQuery = /\.?(all|get|getAll|list)(?:$|[.?])/.test(procedure);
+    const method = isQuery ? "query" : "mutation";
+    const res = await api(`/api/trpc/${procedure}?batch=1`, {
+      method: "POST",
+      headers,
+      json: wrapBatch(payload, method),
+      credentials: "include",
+    });
+    const text = await res.text();
+    let body; try { body = JSON.parse(text); } catch { }
+    if (res.ok && (body?.[0]?.result?.data?.json !== undefined || body?.[0]?.json !== undefined)) {
+      return body?.[0]?.result?.data?.json ?? body?.[0]?.json ?? body?.[0];
+    }
   }
 
-  const errMsg =
-    parsedB?.error?.json?.message ||
-    parsedB?.error?.message ||
-    parsedA?.error?.json?.message ||
-    parsedA?.error?.message ||
-    text;
-  throw new Error(`tRPC ${procedure} 실패: HTTP ${res.status}\n${errMsg}`);
+  // ---- 3차: 구형 단건 포맷  body = { json: { method, params:{ path, input:{ json: payload }}} }
+  {
+    const res = await api(`/api/trpc/${procedure}`, {
+      method: "POST",
+      headers,
+      json: {
+        json: {
+          method: "mutation",
+          params: { path: procedure, input: { json: payload } },
+        },
+      },
+      credentials: "include",
+    });
+    const text = await res.text();
+    let body; try { body = JSON.parse(text); } catch { }
+    if (res.ok && (body?.result?.data?.json !== undefined || body?.json !== undefined)) {
+      return body?.result?.data?.json ?? body?.json ?? body;
+    }
+    const errMsg =
+      body?.error?.json?.message ||
+      body?.error?.message ||
+      text;
+    throw new Error(`tRPC ${procedure} 실패: HTTP ${res.status}\n${errMsg}`);
+  }
 }
+
 
 /** LLM 연결 생성 */
 export async function createLlmConnection(input, opts = {}) {
@@ -104,25 +134,23 @@ export async function createLlmConnection(input, opts = {}) {
     throw new Error("필수 값 누락: name(provider), apiKey(secretKey)");
   }
 
-  const projectId = opts.projectId || import.meta.env.VITE_DEFAULT_PROJECT_ID;
+  const { projectId } = opts;
+  if (!projectId) throw new Error("projectId required");
 
   const payload = {
     projectId,
     provider: String(name),
     adapter,
     secretKey: apiKey,
-    baseURL: baseUrl || undefined, // 서버 기대 키는 baseURL(대문자 U)
+    baseURL: baseUrl || undefined, // 서버는 baseURL(대문자 U)을 기대
     withDefaultModels: !!enableDefaultModels,
     customModels: (customModels || [])
-      .map(s => String(s || "").trim())
+      .map((s) => String(s || "").trim())
       .filter(Boolean),
     extraHeaders: headersArrayToRecord(extraHeaders),
   };
 
-  console.log("[LLM] create 요청 payload:", payload);
-  const result = await callTrpc("llmApiKey.create", payload);
-  console.log("[LLM] create 성공:", result);
-
+  const result = await callTrpc("llmApiKey.create", payload, projectId);
   return result ?? { ok: true, action: "created" };
 }
 
@@ -134,8 +162,8 @@ export async function updateLlmConnection(id, input, opts = {}) {
   } = normalizeInput(input);
 
   if (!id) throw new Error("업데이트할 id가 필요합니다");
-
-  const projectId = opts.projectId || import.meta.env.VITE_DEFAULT_PROJECT_ID;
+  const { projectId } = opts;
+  if (!projectId) throw new Error("projectId required");
 
   const payload = {
     id,
@@ -146,78 +174,72 @@ export async function updateLlmConnection(id, input, opts = {}) {
     baseURL: baseUrl || undefined,
     withDefaultModels:
       enableDefaultModels !== undefined ? !!enableDefaultModels : undefined,
-    customModels: customModels && customModels.length > 0
-      ? customModels.map(s => String(s || "").trim()).filter(Boolean)
-      : undefined,
+    customModels:
+      customModels && customModels.length > 0
+        ? customModels.map((s) => String(s || "").trim()).filter(Boolean)
+        : undefined,
     extraHeaders:
       extraHeaders && extraHeaders.length > 0
         ? headersArrayToRecord(extraHeaders)
         : undefined,
   };
 
-  console.log("[LLM] update 요청 payload:", payload);
-  const result = await callTrpc("llmApiKey.update", payload);
-  console.log("[LLM] update 성공:", result);
-
+  const result = await callTrpc("llmApiKey.update", payload, projectId);
   return result ?? { ok: true, action: "updated" };
 }
 
-/** LLM 연결 생성/업데이트 (Upsert) */
+/** Upsert: create 실패 시 update(provider 이름 기준) 재시도 */
 export async function upsertLlmConnection(input, opts = {}) {
+  const { name } = normalizeInput(input);
   try {
     return await createLlmConnection(input, opts);
   } catch (createError) {
-    console.log("[LLM] create 실패, update 시도:", createError.message);
-    const { name } = normalizeInput(input);
+    // console.log("[LLM] create 실패, update 시도:", createError?.message);
     try {
       return await updateLlmConnection(name, input, opts);
     } catch (updateError) {
-      console.error("[LLM] create/update 모두 실패");
       throw new Error(
-        `LLM 연결 생성/업데이트 실패:\nCreate: ${createError.message}\nUpdate: ${updateError.message}`
+        `LLM 연결 생성/업데이트 실패:\nCreate: ${createError?.message}\nUpdate: ${updateError?.message}`
       );
     }
   }
 }
 
-/** LLM 연결 목록 조회 */
+/** 목록 조회 */
 export async function listLlmConnections(opts = {}) {
-  const projectId = opts.projectId || import.meta.env.VITE_DEFAULT_PROJECT_ID;
-  console.log("[LLM] 목록 조회 요청, projectId:", projectId);
+  const { projectId } = opts;
+  if (!projectId) throw new Error("projectId required");
 
-  const result = await callTrpc("llmApiKey.all", { projectId });
-  console.log("[LLM] 목록 조회 결과:", result);
+  const result = await callTrpc("llmApiKey.all", { projectId }, projectId);
 
-  // 서버 응답 형태에 유연히 대응
+  // 서버 응답형 유연 처리
   const items =
     Array.isArray(result?.data) ? result.data :
-    Array.isArray(result) ? result :
-    result ? [result] : [];
+      Array.isArray(result) ? result :
+        result ? [result] : [];
 
   return items;
 }
 
-/** LLM 연결 삭제 */
+/** 삭제 */
 export async function deleteLlmConnection(id, opts = {}) {
   if (!id) throw new Error("삭제할 id가 필요합니다");
+  const { projectId } = opts;
+  if (!projectId) throw new Error("projectId required");
 
-  const projectId = opts.projectId || import.meta.env.VITE_DEFAULT_PROJECT_ID;
-  console.log("[LLM] 삭제 요청:", { id, projectId });
-
-  const result = await callTrpc("llmApiKey.delete", { projectId, id });
-  console.log("[LLM] 삭제 성공:", result);
-
+  const result = await callTrpc("llmApiKey.delete", { projectId, id }, projectId);
   return result ?? { ok: true };
 }
 
-/** LLM 연결 테스트 */
+/** 연결 테스트 */
 export async function testLlmConnection(input, opts = {}) {
   const {
     name, adapter, apiKey, baseUrl,
     extraHeaders, enableDefaultModels, customModels,
   } = normalizeInput(input);
 
-  const projectId = opts.projectId || import.meta.env.VITE_DEFAULT_PROJECT_ID;
+  const { projectId } = opts;
+  if (!projectId) throw new Error("projectId required");
 
   const payload = {
     projectId,
@@ -227,14 +249,11 @@ export async function testLlmConnection(input, opts = {}) {
     baseURL: baseUrl || undefined,
     withDefaultModels: !!enableDefaultModels,
     customModels: (customModels || [])
-      .map(s => String(s || "").trim())
+      .map((s) => String(s || "").trim())
       .filter(Boolean),
     extraHeaders: headersArrayToRecord(extraHeaders),
   };
 
-  console.log("[LLM] 연결 테스트 요청:", payload);
-  const result = await callTrpc("llmApiKey.test", payload);
-  console.log("[LLM] 연결 테스트 결과:", result);
-
+  const result = await callTrpc("llmApiKey.test", payload, projectId);
   return result;
 }

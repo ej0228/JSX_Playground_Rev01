@@ -9,7 +9,11 @@ const SearchInput = ({
   onChange,
   searchType,
   setSearchType,
-  searchTypes
+  searchTypes,
+  className,
+  style,
+  fullWidth = false,  // ⬅️ 한 줄 꽉 채우기
+  dense = false       // ⬅️ 입력창 세로여백 정돈
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -31,7 +35,16 @@ const SearchInput = ({
   };
 
   return (
-    <div className={styles.searchBox} ref={dropdownRef}>
+    <div
+      ref={dropdownRef}
+      className={[
+        styles.searchBox,
+        fullWidth ? styles.fullWidth : "",
+        dense ? styles.dense : "",
+        className || ""
+      ].join(" ")}
+      style={style}
+    >
       <Search size={18} className={styles.searchIcon} />
       <input
         type="text"

@@ -33,6 +33,27 @@ import useProjectId from "../../hooks/useProjectId";
 import { SlidersHorizontal } from "lucide-react"; // 고급 설정 아이콘
 import ModelAdvancedSettingsPopover from "./ModelAdvancedSettingsPopover";
 
+
+//tool, schema search bar
+import SearchInput from "../../components/SearchInput/SearchInput";
+
+
+
+
+function filterByQuery(list, q, type) {
+  const s = (q || "").toLowerCase().trim();
+  if (!s) return list;
+  return (list || []).filter((item) => {
+    const name = (item.name || "").toLowerCase();
+    const desc = (item.description || "").toLowerCase();
+    if (type === "Name") return name.includes(s);
+    if (type === "Description") return desc.includes(s);
+    // All
+    return name.includes(s) || desc.includes(s);
+  });
+}
+
+
 // 메시지 배열 -> 텍스트 병합
 function mergeMessageText(messages) {
   return messages
@@ -115,6 +136,7 @@ function extractPlaceholders(messages) {
 
 // ---------- Tools Panel ----------
 
+
 const ToolsPanelContent = ({
   attachedTools,
   availableTools,
@@ -124,40 +146,22 @@ const ToolsPanelContent = ({
   onEditTool,
   onDeleteTool,
   loading,
-}) => (
-  <>
-    {attachedTools.map((tool) => (
-      <div className={styles.toolSection} key={tool.id}>
-        <div className={styles.toolItem}>
-          <div className={styles.toolInfo}>
-            <Wrench size={14} />
-            <div className={styles.toolText}>
-              <span className={styles.toolName}>{tool.name}</span>
-              <span className={styles.toolDesc}>{tool.description}</span>
-            </div>
-          </div>
-          <div className={styles.iconCircle} onClick={() => onRemoveTool(tool.id)}>
-            <Minus size={14} />
-          </div>
-        </div>
-      </div>
-    ))}
 
-    <div className={styles.toolSearch}>
-      <Search size={14} />
-      <input type="text" placeholder="Search tools..." disabled={loading} />
-    </div>
+}) => {
+  const [toolQuery, setToolQuery] = useState("");
+  const [toolSearchType, setToolSearchType] = useState("All");
+  const filtered = useMemo(
+    () => filterByQuery(availableTools, toolQuery, toolSearchType),
+    [availableTools, toolQuery, toolSearchType]
+  );
+  return (
+    <>
 
-    <div className={styles.toolList}>
-      {loading ? (
-        <div className={styles.muted}>Loading tools…</div>
-      ) : (
-        availableTools.map((tool) => (
-          <div
-            className={styles.toolItem}
-            key={tool.id}
-            onDoubleClick={() => onAddTool(tool)}
-          >
+
+
+      {attachedTools.map((tool) => (
+        <div className={styles.toolSection} key={tool.id}>
+          <div className={styles.toolItem}>
             <div className={styles.toolInfo}>
               <Wrench size={14} />
               <div className={styles.toolText}>
@@ -165,25 +169,65 @@ const ToolsPanelContent = ({
                 <span className={styles.toolDesc}>{tool.description}</span>
               </div>
             </div>
-            <div className={styles.rowActions}>
-              <button className={styles.editButton} title="Edit" onClick={(e) => { e.stopPropagation(); onEditTool(tool); }}>
-                <Edit size={14} />
-              </button>
-              <button className={styles.editButton} title="Delete" onClick={(e) => { e.stopPropagation(); onDeleteTool(tool); }}>
-                <X size={14} />
-              </button>
+            <div className={styles.iconCircle} onClick={() => onRemoveTool(tool.id)}>
+              <Minus size={14} />
             </div>
           </div>
-        ))
-      )}
-    </div>
+        </div>
+      ))}
 
-    <button className={styles.toolButton} onClick={onCreateTool} disabled={loading}>
-      <Plus size={14} /> Create new tool
-    </button>
-  </>
-);
+      <div className={styles.toolSearch}>
+        <SearchInput
+          placeholder="Search tools…"
+          value={toolQuery}
+          onChange={(e) => setToolQuery(e.target.value)}
+          searchType={toolSearchType}
+          setSearchType={setToolSearchType}
+          searchTypes={["All", "Name", "Description"]}
+          fullWidth
+          dense
+        />
+      </div>
 
+      <div className={styles.toolList}>
+        {loading ? (
+          <div className={styles.muted}>Loading tools…</div>
+        ) : filtered.length === 0 ? (
+          <div className={styles.muted}>No tools found</div>
+        ) : (
+          filtered.map((tool) => (
+            <div
+              className={styles.toolItem}
+              key={tool.id}
+              onDoubleClick={() => onAddTool(tool)}
+            >
+              <div className={styles.toolInfo}>
+                <Wrench size={14} />
+                <div className={styles.toolText}>
+                  <span className={styles.toolName}>{tool.name}</span>
+                  <span className={styles.toolDesc}>{tool.description}</span>
+                </div>
+              </div>
+              <div className={styles.rowActions}>
+                <button className={styles.editButton} title="Edit" onClick={(e) => { e.stopPropagation(); onEditTool(tool); }}>
+                  <Edit size={14} />
+                </button>
+                <button className={styles.editButton} title="Delete" onClick={(e) => { e.stopPropagation(); onDeleteTool(tool); }}>
+                  <X size={14} />
+                </button>
+              </div>
+            </div>
+          ))
+
+        )}
+      </div>
+
+      <button className={styles.toolButton} onClick={onCreateTool} disabled={loading}>
+        <Plus size={14} /> Create new tool
+      </button>
+    </>
+  );
+};
 
 // ---------- Schema Panel ----------
 const SchemaPanelContent = ({
@@ -195,65 +239,83 @@ const SchemaPanelContent = ({
   onEditSchema,
   onDeleteSchema,
   loading,
-}) => (
-  <>
-    {userSchema && (
-      <div className={styles.toolSection}>
-        <div className={styles.toolItem}>
-          <div className={styles.toolInfo}>
-            <BookText size={14} />
-            <div className={styles.toolText}>
-              <span className={styles.toolName}>{userSchema.name}</span>
-              <span className={styles.toolDesc}>{userSchema.description}</span>
+}) => {
+  const [schemaQuery, setSchemaQuery] = useState("");
+  const [schemaSearchType, setSchemaSearchType] = useState("All");
+  const filtered = useMemo(
+    () => filterByQuery(availableSchemas, schemaQuery, schemaSearchType),
+    [availableSchemas, schemaQuery, schemaSearchType]
+  );
+  return (
+    <>
+      {userSchema && (
+        <div className={styles.toolSection}>
+          <div className={styles.toolItem}>
+            <div className={styles.toolInfo}>
+              <BookText size={14} />
+              <div className={styles.toolText}>
+                <span className={styles.toolName}>{userSchema.name}</span>
+                <span className={styles.toolDesc}>{userSchema.description}</span>
+              </div>
+            </div>
+            <div className={styles.iconCircle} onClick={() => onRemoveSchema(userSchema.id)} title="Detach schema">
+              <Minus size={14} />
             </div>
           </div>
-          <div className={styles.iconCircle} onClick={() => onRemoveSchema(userSchema.id)} title="Detach schema">
-            <Minus size={14} />
-          </div>
         </div>
+      )}
+
+      <div className={styles.toolSearch}>
+        <SearchInput
+          placeholder="Search schemas…"
+          value={schemaQuery}
+          onChange={(e) => setSchemaQuery(e.target.value)}
+          searchType={schemaSearchType}
+          setSearchType={setSchemaSearchType}
+          searchTypes={["All", "Name", "Description"]}
+          fullWidth
+          dense
+        />
       </div>
-    )}
 
-    <div className={styles.toolSearch}>
-      <Search size={14} />
-      <input type="text" placeholder="Search schemas..." disabled={loading} />
-    </div>
+      <div className={styles.toolList}>
 
-    <div className={styles.toolList}>
+        {loading ? (
+          <div className={styles.muted}>Loading schemas…</div>
+        ) : filtered.length === 0 ? (
+          <div className={styles.muted}>No schemas found</div>
+        ) : filtered.map((schema) => (
+          <div
+            className={styles.toolItem}
+            key={schema.id}
+            onDoubleClick={() => onAddSchema(schema)}
+            title="Double click to attach"
+          >
+            <div className={styles.toolInfo}>
+              <div className={styles.toolText}>
+                <span className={styles.toolName}>{schema.name}</span>
+                <span className={styles.toolDesc}>{schema.description}</span>
+              </div>
+            </div>
 
-      {loading ? (
-        <div className={styles.muted}>Loading schemas…</div>
-      ) : availableSchemas.map((schema) => (
-        <div
-          className={styles.toolItem}
-          key={schema.id}
-          onDoubleClick={() => onAddSchema(schema)}
-          title="Double click to attach"
-        >
-          <div className={styles.toolInfo}>
-            <div className={styles.toolText}>
-              <span className={styles.toolName}>{schema.name}</span>
-              <span className={styles.toolDesc}>{schema.description}</span>
+            <div className={styles.rowActions}>
+              <button className={styles.editButton} title="Edit" onClick={(e) => { e.stopPropagation(); onEditSchema(schema); }}>
+                <Edit size={14} />
+              </button>
+              <button className={styles.editButton} title="Delete" onClick={(e) => { e.stopPropagation(); onDeleteSchema(schema); }}>
+                <X size={14} />
+              </button>
             </div>
           </div>
+        ))}
+      </div>
 
-          <div className={styles.rowActions}>
-            <button className={styles.editButton} title="Edit" onClick={(e) => { e.stopPropagation(); onEditSchema(schema); }}>
-              <Edit size={14} />
-            </button>
-            <button className={styles.editButton} title="Delete" onClick={(e) => { e.stopPropagation(); onDeleteSchema(schema); }}>
-              <X size={14} />
-            </button>
-          </div>
-        </div>
-      ))}
-    </div>
-
-    <button className={styles.toolButton} onClick={onCreateSchema} disabled={loading}>
-      <Plus size={14} /> Create new schema
-    </button>
-  </>
-);
+      <button className={styles.toolButton} onClick={onCreateSchema} disabled={loading}>
+        <Plus size={14} /> Create new schema
+      </button>
+    </>
+  );
+};
 
 
 /** 스트리밍 설정 팝오버: 외부 클릭/ESC 닫기 지원 */
@@ -1201,7 +1263,7 @@ const PlaygroundComponent = ({ PROJECT_ID, onCopy, onRemove, showRemoveButton, p
       </div>
 
       {/* Modals */}
-      <NewLlmConnectionModal isOpen={isLlmModalOpen} onClose={() => setIsLlmModalOpen(false)} />
+      <NewLlmConnectionModal isOpen={isLlmModalOpen} onClose={() => setIsLlmModalOpen(false)} projectId={PROJECT_ID} />
 
       {/* 모달 띄우기 & 저장 처리 */}
       {modalType === "tool" && (
