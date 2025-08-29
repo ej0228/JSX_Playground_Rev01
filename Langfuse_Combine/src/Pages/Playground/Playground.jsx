@@ -1120,13 +1120,15 @@ const PlaygroundComponent = ({ PROJECT_ID, onCopy, onRemove, showRemoveButton, p
 
 
         {/* ✅ 이제 cardBody에는 모델 관련 내용 없음 */}
-        <div className={styles.cardBody}>
-          {loadingConn ? (
-            <p className={styles.muted}>Loading LLM connections…</p>
-          ) : connError ? (
-            <p className={styles.errorText}>{connError}</p>
-          ) : null}
-        </div>
+        {(loadingConn || connError) && (
+          <div className={styles.cardBody}>
+            {loadingConn ? (
+              <p className={styles.muted}>Loading LLM connections…</p>
+            ) : connError ? (
+              <p className={styles.errorText}>{connError}</p>
+            ) : null}
+          </div>
+        )}
 
         {isSavePopoverOpen && <SavePromptPopover onSaveAsNew={() => console.log("onSaveAsNew")} />}
       </div>
